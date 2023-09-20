@@ -3,11 +3,11 @@ const jwt = require('jsonwebtoken')
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
+const bcrypt = require('bcrypt')
 
 //import secara local
 const models = require('./models')
-
-// Import the jwt.js module
+// Import the jwt.js 
 const { comparePassword } = require('./helpers/password')
 const { generateToken, verifyToken } = require('./helpers/jwt')
 const { Op } = require('sequelize')
@@ -20,25 +20,32 @@ app
    .use(cors())
    .use(bodyParser.json())
    .post('/register', async (req, res) => {
-      const { name,email, password } = req.body;
-      const { User } = models;
+      const { name, email, password } = req.body;
+      const { User } = models
     
-      // Check if email or username is already in use
-      const existingUser = await User.findOne({
-        where: {
-          [Op.or]: [{ email }, { name }]
+      try {
+        // Check if email or username is already in use
+        const existingUser = await User.findOne({
+          where: {
+            [Op.or]: [{ email }, { name }],
+          },
+        });
+    
+        if (existingUser) {
+          return res.status(400).send('Email or username is already in use.');
         }
-      });
-   //  console.log(existingUser)
-      if (existingUser) {
-        return res.status(400).send('Email or username is already in use.')
-      //   console.log('user :',existingUser)
-      }
-      // Create the user if email and username are not in use
-      User.create({ name, email, password })
-        .then(() => {
-          return res.status(201).send(`Successfully registered, name: ${name}`)
-        })
+   
+        // Hash the password 
+        const hashedPassword = bcrypt.hashSync(password, 10);
+    
+        // Create user with the hashed password
+        await User.create({ name, email, password: hashedPassword });
+    
+        return res.status(201).send(`Successfully registered, name: ${name}`);
+      } catch (error) {
+        console.error(error);
+        return res.status(500).send('Internal Server Error')
+        }
     })
    
    .post('/login', (req, res) => {
@@ -50,7 +57,7 @@ app
       }
       User.findOne({ where: { email: email } })
          .then((foundUser) => {
-            // console.log(foundUser)
+            console.log(foundUser)
             if (!foundUser) {
                return res.status(401).json({ error: "Unauthorized", message: "Invalid email" })
             }
@@ -62,7 +69,7 @@ app
             }
             const responsePayload = {
                email: foundUser.email,
-               role: foundUser.role,
+               name: foundUser.name,
                id: foundUser.id
             }
             // encode sebagai jwt 
@@ -112,8 +119,6 @@ app
       }
    )
 
-  
-
 app.listen(PORT, () => {
-   console.log(`Aplikasi meluncur di sini ya: http://localhost:${PORT}`)
+   console.log(`Server is running on port: http://localhost:${PORT}`)
 })
