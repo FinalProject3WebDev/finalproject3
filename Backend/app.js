@@ -20,7 +20,7 @@ app
    .use(cors())
    .use(bodyParser.json())
    .post('/register', async (req, res) => {
-      const { name, email, password } = req.body;
+      const { name, email, password, role = 'member', address } = req.body;
       const { User } = models
     
       try {
@@ -39,7 +39,7 @@ app
         const hashedPassword = bcrypt.hashSync(password, 10);
     
         // Create user with the hashed password
-        await User.create({ name, email, password: hashedPassword });
+        await User.create({ name, email, password: hashedPassword, role, address });
     
         return res.status(201).send(`Successfully registered, name: ${name}`);
       } catch (error) {
@@ -70,7 +70,8 @@ app
             const responsePayload = {
                email: foundUser.email,
                name: foundUser.name,
-               id: foundUser.id
+               id: foundUser.id,
+               role: foundUser.role
             }
             // encode sebagai jwt 
             const token = generateToken(responsePayload)

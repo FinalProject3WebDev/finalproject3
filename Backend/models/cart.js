@@ -3,28 +3,24 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class Cart extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      User.hasMany(models.Cart, { foreignKey: 'userId' });
+      Cart.belongsTo(models.User, { foreignKey: 'userId' });
+      Cart.hasMany(models.CartDetail, { foreignKey: 'orderId' });
     }
-  } 
-  User.init({
-    role: {
-      type: DataTypes.STRING,
-      defaultValue: 'member'
-    },
-    name: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    address: DataTypes.STRING
+  }
+  Cart.init({
+    userId: DataTypes.INTEGER,
+    orderStatus: DataTypes.STRING,
+    totalPrice: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'User',
+    modelName: 'Cart',
   });
-  return User;
+  return Cart;
 };
