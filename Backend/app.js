@@ -24,7 +24,7 @@ app
       const { User } = models
     
       try {
-        // Check if email or username is already in use
+        // Check if email or name is already in use
         const existingUser = await User.findOne({
           where: {
             [Op.or]: [{ email }, { name }],
@@ -32,7 +32,7 @@ app
         });
     
         if (existingUser) {
-          return res.status(400).send('Email or username is already in use.');
+          return res.status(400).send('Email or name is already in use.');
         }
    
         // Hash the password 
@@ -114,9 +114,9 @@ app
          }
       },
       (req, res) => {
-         const { id, name, username, email, password, role, address, phonenumber } = res.locals.user
+         const { id, name, email, password, role, address, phonenumber } = res.locals.user
 
-         return res.status(200).send({ id, name, username, email, password, role, address, phonenumber })
+         return res.status(200).send({ id, name, email, password, role, address, phonenumber })
       }
    )
 
