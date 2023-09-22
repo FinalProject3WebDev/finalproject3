@@ -35,7 +35,6 @@ class UserController {
 
     static login (req, res) {
         const { email, password } = req.body
-
         if (!email || !password) {
             return res.status(400).send("Email dan password kosong")
          }
@@ -72,6 +71,22 @@ class UserController {
                console.log(e)
                res.status(500).json({ error: "Internal Server Error", message: e.message })
             })
+    }
+
+    static getUserProfile(req, res) {
+         const { id } = res.locals.user;
+         User.findByPk(id)
+               .then(foundUser => {
+                  if (!foundUser) {
+                     return res.status(404).json({ message: 'User not found' });
+                  }
+   
+                  res.status(200).json({ message: 'User found', user: foundUser });
+               })
+               .catch(error => {
+                  console.error(error);
+                  res.status(500).json({ message: 'Failed to find user' });
+               });
     }
 }
 
