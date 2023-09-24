@@ -1,0 +1,25 @@
+<div class="container mt-4">
+    <h1>My Orders</h1>
+  
+    <div *ngFor="let order of orders" class="mb-4">
+      <div class="card">
+        <div class="card-header">
+          Order #{{ order.id }}
+          <span class="float-right">Total Price: ${{ order.totalPrice }}</span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Shipping Address</h5>
+          <p class="card-text">{{ order.shippingAddress }}</p>
+  
+          <h5 class="card-title">Ordered Products</h5>
+          <ul class="list-group">
+            <li *ngFor="let item of order.items" class="list-group-item">
+              Product: {{ item.productName }}
+              <span class="float-right">Quantity: {{ item.quantity }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
