@@ -14,7 +14,7 @@ import { ProductComponent } from './product/product.component';
     AppComponent,
     CartComponent,
     NavbarComponent,
-    OrderComponent
+    OrderComponent,
     ProductComponent
   ],
   imports: [
