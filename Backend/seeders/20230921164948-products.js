@@ -15,7 +15,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        categoryId: 2, 
+        categoryId: 1, 
         productName: 'Bass Headphone',
         productDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         price: 3100000, 
@@ -25,7 +25,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        categoryId: 3, 
+        categoryId: 4, 
         productName: 'Casetify 4.1',
         productDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         price: 990000, 
@@ -45,7 +45,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        categoryId: 5, 
+        categoryId: 4, 
         productName: 'Casetify 4.4',
         productDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         price: 300000, 
@@ -55,7 +55,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        categoryId: 6, 
+        categoryId: 3, 
         productName: 'Earbuds XA-2',
         productDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         price: 2200000, 
@@ -65,7 +65,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        categoryId: 7, 
+        categoryId: 3, 
         productName: 'Earbuds XC-2',
         productDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         price: 2129000, 
@@ -75,7 +75,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        categoryId: 8, 
+        categoryId: 4, 
         productName: 'Magsafe 2',
         productDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         price: 1429000, 
@@ -85,7 +85,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        categoryId: 9, 
+        categoryId: 4, 
         productName: 'Magsafe S',
         productDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         price: 1129000, 
@@ -95,7 +95,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        categoryId: 10, 
+        categoryId: 4, 
         productName: 'Powerbank 4-In-1',
         productDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         price: 100000, 
