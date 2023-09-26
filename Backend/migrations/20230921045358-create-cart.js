@@ -12,12 +12,6 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER
       },
-      orderStatus: {
-        type: Sequelize.STRING
-      },
-      totalPrice: {
-        type: Sequelize.INTEGER
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

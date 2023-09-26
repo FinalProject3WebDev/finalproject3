@@ -1,4 +1,4 @@
-const { User } = require('../models/user');
+const { User } = require('../models');
 const { verifyToken } = require('../helpers/jwt');
 
 function authentication(req, res, next) {
@@ -25,9 +25,4 @@ function authentication(req, res, next) {
     }
 }
 
-function sendUserData(req, res) {
-    const { id, name, email, role, address, phonenumber } = res.locals.user;
-    return res.status(200).send({ id, name, email, role, address, phonenumber });
-}
-
-module.exports = { authentication, sendUserData };
+module.exports = { authentication };

@@ -1,4 +1,4 @@
-const { product, cart } = require('../models');
+const { Product, Cart } = require('../models');
 
 class CartController {
     // add item to cart
@@ -7,13 +7,19 @@ class CartController {
         const userId = res.locals.user.id;
         const quantity = req.body.quantity;
 
-        product.findByPk(productId)
+        // return res.status(200).json({id: productId, userId: userId, quantity: quantity});
+
+        Product.findOne({
+            where: {
+                id: productId,
+            }
+        })
             .then(foundProduct => {
                 if (!foundProduct) {
                     return res.status(404).json({ message: 'Product not found' });
                 }
 
-                cart.findOne({
+                Cart.findOne({
                     where: {
                         userId,
                         productId,
@@ -32,7 +38,7 @@ class CartController {
                                 });
                         } else {
                             // add item to cart
-                            cart.create({ userId, productId, quantity })
+                            Cart.create({ userId, productId, quantity })
                                 .then(newCartItem => {
                                     res.status(201).json({ message: 'Product added to cart', cartItem: newCartItem });
                                 })
@@ -57,9 +63,9 @@ class CartController {
     static getCartItems(req, res) {
         const userId = res.locals.user.id;
 
-        cart.findAll({
+        Cart.findAll({
             where: {
-                userId,
+                userId: userId,
             },
             include: [product],
         })
