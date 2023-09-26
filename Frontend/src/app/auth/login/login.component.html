@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+</head>
+
+<body>
+  <!-- Section: Design Block -->
+  <section class="" style="padding: 10px;">
+    <!-- Jumbotron -->
+    <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 100%)">
+      <div class="container">
+        <div class="row gx-lg-5 align-items-center">
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <h5 class="my-5 display-3 fw-bold ls-tight">
+              Welcome back! <br />
+              <span class="text-primary">Login to your account</span>
+            </h5>
+          </div>
+
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="card">
+              <div class="card-body py-5 px-md-5">
+                <h2>Login</h2>
+                <form [formGroup]="form" (submit)="submit()">
+                  <!-- Email input -->
+                  <div class="form-outline mb-4">
+                    <input formControlName="email" type="text" id="email" name="email" class="form-control"
+                      placeholder="email" required="Email wajib diisi" />
+                    <!-- <label class="form-label" for="form3Example3">Email address</label> -->
+                  </div>
+
+                  <!-- Password input -->
+                  <div class="form-outline mb-4">
+                    <input formControlName="password" type="password" id="password" name="password"
+                      placeholder="Password" class="form-control" required />
+                    <!-- <label class="form-label" for="form3Example4">Password</label> -->
+                  </div>
+                  <!-- Submit button -->
+                  <button type="submit" class="btn btn-primary btn-block mb-4" style="margin: 5px;">
+                    Sign in
+                  </button>
+                  <!-- Register buttons -->
+                </form>
+                <div class="text-center">
+                  <p>sign up using:</p>
+                  <a routerLink="/register">Sign up</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Jumbotron -->
+  </section>
+
+  <!-- Section: Design Block -->
+</body>
+
+</html>

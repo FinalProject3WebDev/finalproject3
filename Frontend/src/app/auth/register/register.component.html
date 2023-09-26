@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+</head>
+
+<body>
+  <!-- Section: Design Block -->
+  <section class="">
+    <!-- Jumbotron -->
+    <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 100%)">
+      <div class="container">
+        <div class="row gx-lg-5 align-items-center">
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <h1 class="my-5 display-3 fw-bold ls-tight">
+              Register <br />
+              <span class="text-primary">Your Account</span>
+            </h1>
+          </div>
+
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="card">
+              <div class="card-body py-5 px-md-5">
+                <div class="container">
+                  <h2>Register</h2>
+                  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                          <input type="text" id="name" formControlName="name" name="name" class="form-control" placeholder="Name" required />
+                          <div *ngIf="registrationForm.get('name')?.hasError('required') && registrationForm.get('name')?.touched" class="alert alert-danger">
+                            Name is required.
+                          </div>
+                          <div *ngIf="registrationForm.get('name')?.hasError('name') && registrationForm.get('name')?.touched" class="alert alert-danger">
+                            Invalid name .
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                          <input type="email" id="email" formControlName="email" name="email" class="form-control" placeholder="Email" required> 
+                          <div *ngIf="registrationForm.get('email')?.hasError('required') && registrationForm.get('email')?.touched" class="alert alert-danger">
+                            Email is required.
+                          </div>
+                          <div *ngIf="registrationForm.get('email')?.hasError('email') && registrationForm.get('email')?.touched" class="alert alert-danger">
+                            Invalid email address.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <div class="form-outline mb-4">
+                      <input type="text" id="address" formControlName="address" name="address" class="form-control" placeholder="Address" required>
+                      <div *ngIf="registrationForm.get('address')?.hasError('required') && registrationForm.get('address')?.touched" class="alert alert-danger">
+                        Address is required.
+                      </div>
+                    </div>
+                  
+                    <div class="form-outline mb-4">
+                      <input type="password" id="password" formControlName="password" name="password" class="form-control" placeholder="Password" required>
+                      <div *ngIf="registrationForm.get('password')?.hasError('required') && registrationForm.get('password')?.touched" class="alert alert-danger">
+                        Password is required.
+                      </div>
+                      <div *ngIf="registrationForm.get('password')?.hasError('minlength') && registrationForm.get('password')?.touched" class="alert alert-danger">
+                        Password must be at least 6 characters long.
+                      </div>
+                    </div>
+                  
+                    <!-- Registration error message -->
+                    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+                  
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary btn-block mb-4" style="margin: 5px;">
+                        Sign in
+                      </button>
+                    </div>
+                  </form>
+                  
+                  <p>Already have an account? <a routerLink="/login">Sign in</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Jumbotron -->
+  </section>
+  <!-- Section: Design Block -->
+</body>
+
+</html>

@@ -2,7 +2,8 @@ const { User } = require('../models');
 const { comparePassword } = require('../helpers/password');
 const { generateToken } = require('../helpers/jwt');
 const { Op } = require('sequelize')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const user = require('../models/user');
 
 class UserController {
     static async register(req, res) {
@@ -27,6 +28,7 @@ class UserController {
             await User.create({ name, email, password: hashedPassword, role, address });
         
             return res.status(201).send(`Successfully registered, name: ${name}`);
+            console.log("user",user)
         } catch (error) {
             console.error(error);
             return res.status(500).send('Internal Server Error')
