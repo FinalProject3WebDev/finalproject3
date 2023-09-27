@@ -12,4 +12,8 @@ export class CartService {
   getCartItems() {
     return this.http.get(this.apiUrl + '/cart/mycart');
   }
+
+  addToCart(productId: number) {
+    return this.http.post(`${this.apiUrl}/cart/${productId}`, {});
+  }
 }

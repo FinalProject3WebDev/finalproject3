@@ -9,6 +9,7 @@ import { CartService } from '../services/cart.service';
 })
 export class CartComponent implements OnInit {
   cartItems: any[] = []; 
+  totalPrice = 0;
   shippingCost = 10; 
 
   constructor(private cartService: CartService, private orderService: OrderService) { }
@@ -16,25 +17,18 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     // display cart items
     this.cartService.getCartItems().subscribe(
-      response => {
-        this.cartItems = response as any[];
+      (response: any) => {
+        if (response && Array.isArray(response.cartItems)) {
+          this.cartItems = response.cartItems;
+          this.totalPrice = response.totalPrice;
+        } else {
+          this.cartItems = []; // Set it to an empty array if the response is not as expected
+        }
       },
-      error => {
-        console.error('Failed to fetch cart items', error);
+      (error) => {
+        console.error('Failed to get cart items', error);
       }
     );
-  }
-
-  calculateSubtotal(): number {
-    return this.cartItems.reduce((total, item) => total + (item.totalPrice * item.quantity), 0);
-  }
-
-  calculateTotal(): number {
-    return this.calculateSubtotal() + this.shippingCost;
-  }
-
-  changeAddress(): void {
-
   }
 
   checkout(): void {
@@ -42,7 +36,6 @@ export class CartComponent implements OnInit {
     const orderData = {
       cartItems: this.cartItems,
       shippingAddress: 'Jalan Ganesha No.10 Bandung, Jawa Barat 19234',
-      totalPrice: this.calculateTotal()
     };
 
     // add order

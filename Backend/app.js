@@ -1,25 +1,16 @@
 // import dari node_module
-const jwt = require('jsonwebtoken')
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const bcrypt = require('bcrypt')
-
-//import secara local
-const models = require('./models')
-// Import the jwt.js 
-const { comparePassword } = require('./helpers/password')
-const { generateToken, verifyToken } = require('./helpers/jwt')
-const { Op } = require('sequelize')
-
 const app = express()
 const PORT = 3000
 const router = require('./routers')
 
 app
    .use(express.json())
+   .use(express.urlencoded({ extended: false }))
    .use(cors())
-   .use(bodyParser.json())
+   // .use(bodyParser.json())
 
 app.use(router);
 

@@ -25,11 +25,12 @@ router.get('/profile', UserController.getUserProfile);
 // Cart 
 router.get('/cart/mycart', CartController.getCartItems);
 router.post('/cart/:productId', CartController.addToCart);
+router.delete('/cart/:itemId', CartController.removeCartItem);
 
 // Order 
 router.post('/order/create', OrderController.createOrder);
-router.get('/order/history', OrderController.getOrderHistory);
-router.get('/order/:orderId', OrderController.getOrderDetails); //blm tau perlu ato ga
+router.get('/order/history', OrderController.getOrders);
+router.delete('/order/:orderId', OrderController.deleteOrderById);
 
 module.exports = router;
 

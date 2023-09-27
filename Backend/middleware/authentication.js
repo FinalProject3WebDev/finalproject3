@@ -3,7 +3,7 @@ const { verifyToken } = require('../helpers/jwt');
 
 function authentication(req, res, next) {
     try {
-        const token = req.get('token');
+        const token = req.get('accessToken');
         const payload = verifyToken(token);
 
         User.findOne({ where: { name: payload.name } })

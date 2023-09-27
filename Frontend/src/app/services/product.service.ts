@@ -7,11 +7,11 @@ import { Product } from '../interfaces/product';
   providedIn: 'root',
 })
 export class ProductService {
-  private baseUrl = '/api/products'
+  private baseUrl = 'http://localhost:3000'
 
   constructor(private http: HttpClient) {}
 
   getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.baseUrl)
+    return this.http.get<Product[]>(`${this.baseUrl}/products`)
   }
 }

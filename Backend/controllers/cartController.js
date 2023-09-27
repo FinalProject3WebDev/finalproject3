@@ -1,4 +1,4 @@
-const { Product, Cart } = require('../models');
+const { Product, Cart, CartItem } = require('../models');
 
 class CartController {
     // add item to cart
@@ -6,75 +6,132 @@ class CartController {
         const productId = req.params.productId;
         const userId = res.locals.user.id;
         const quantity = req.body.quantity;
-
-        // return res.status(200).json({id: productId, userId: userId, quantity: quantity});
-
-        Product.findOne({
+    
+        // find or create a cart for the user
+        Cart.findOrCreate({
             where: {
-                id: productId,
-            }
+                userId: userId,
+            },
         })
-            .then(foundProduct => {
-                if (!foundProduct) {
+        .then(([cart]) => {
+            Product.findByPk(productId)
+            .then(product => {
+                if (!product) {
                     return res.status(404).json({ message: 'Product not found' });
                 }
 
-                Cart.findOne({
+                CartItem.findOrCreate({
                     where: {
-                        userId,
-                        productId,
-                    }
+                        cartId: cart.id,
+                        productId: productId,
+                    },
+                    defaults: {
+                        quantity: 0,
+                        price: 0,
+                    },
                 })
-                    .then(foundCartItem => {
-                        if (foundCartItem) {
-                            // update quantity
-                            foundCartItem.update({ quantity: foundCartItem.quantity + quantity })
-                                .then(updatedCartItem => {
-                                    res.status(200).json({ message: 'Product quantity updated in cart', cartItem: updatedCartItem });
-                                })
-                                .catch(error => {
-                                    console.error(error);
-                                    res.status(500).json({ message: 'Failed to update cart item quantity' });
-                                });
-                        } else {
-                            // add item to cart
-                            Cart.create({ userId, productId, quantity })
-                                .then(newCartItem => {
-                                    res.status(201).json({ message: 'Product added to cart', cartItem: newCartItem });
-                                })
-                                .catch(error => {
-                                    console.error(error);
-                                    res.status(500).json({ message: 'Failed to create cart item' });
-                                });
-                        }
+                .then(([cartItem, created]) => {
+                    const productPrice = product.price; 
+                    const updatedQuantity = cartItem.quantity + quantity;
+                    let updatedPrice = productPrice * updatedQuantity;
+
+                    if (created) {
+                        updatedPrice = productPrice * quantity;
+                    }
+        
+                    cartItem.update({
+                        quantity: updatedQuantity,
+                        price: updatedPrice,
+                    })
+                    .then(updatedCartItem => {
+
+                        CartItem.sum('price', { where: { cartId: cart.id } })
+                        .then(totalPrice => {
+                            cart.update({ totalPrice: totalPrice || 0 })
+                            .then(() => {
+                                res.status(200).json({ message: 'Product added to cart', cartItem: updatedCartItem });
+                            })
+                            .catch(error => {
+                                console.error(error);
+                                res.status(500).json({ message: 'Failed to update cart total price' });
+                            });
+                        })
+                        .catch(error => {
+                            console.error(error);
+                            res.status(500).json({ message: 'Failed to calculate cart total price' });
+                        });
                     })
                     .catch(error => {
                         console.error(error);
-                        res.status(500).json({ message: 'Failed to find cart item' });
+                        res.status(500).json({ message: 'Failed to update cart item quantity' });
                     });
+                })
+                .catch(error => {
+                    console.error(error);
+                    res.status(500).json({ message: 'Failed to find or create cart item' });
+                });
             })
             .catch(error => {
                 console.error(error);
                 res.status(500).json({ message: 'Failed to find product' });
             });
+        })
+        .catch(error => {
+            console.error(error);
+            res.status(500).json({ message: 'Failed to find or create cart' });
+        });
     }
 
-    // retrieve cart items
+    // see cart items
     static getCartItems(req, res) {
         const userId = res.locals.user.id;
 
-        Cart.findAll({
+        Cart.findOne({
             where: {
                 userId: userId,
             },
-            include: [product],
+            include: [
+                {
+                    model: CartItem,
+                    include: [Product],
+                },
+            ],
         })
-            .then(cartItems => {
-                res.status(200).json(cartItems);
+            .then(cart => {
+                if (!cart) {
+                    return res.status(404).json({ message: 'Cart not found' });
+                }
+
+                const totalPrice = cart.CartItems.reduce((sum, cartItem) => {
+                    return sum + cartItem.price; 
+                }, 0);
+
+                res.status(200).json({ message: 'Cart found', cartItems: cart.CartItems, totalPrice: totalPrice });
             })
             .catch(error => {
                 console.error(error);
                 res.status(500).json({ message: 'Failed to retrieve cart items' });
+            });
+    }
+
+    static removeCartItem(req, res) {
+        const itemId = req.params.itemId;
+
+        CartItem.destroy({
+            where: {
+                id: itemId,
+            },
+        })
+            .then(deletedRows => {
+                if (deletedRows > 0) {
+                    res.status(204).json({ message: 'Cart item deleted successfully' });
+                } else {
+                    res.status(404).json({ message: 'Cart item not found' });
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                res.status(500).json({ message: 'Failed to delete cart item' });
             });
     }
 }

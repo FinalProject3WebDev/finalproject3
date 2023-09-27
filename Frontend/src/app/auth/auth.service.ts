@@ -9,6 +9,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class AuthService {
   private apiUrl = 'http://localhost:3000'
+  private token = 'accessToken';
     constructor(private http : HttpClient) {}
 
     registerUser(userData: any) {
@@ -27,6 +28,22 @@ export class AuthService {
     login(credentials: { email: string; password: string }): Observable<any> {
       const url = `${this.apiUrl}/login`;
       return this.http.post(url, credentials);
+    }
+
+    setToken(token: string) {
+      localStorage.setItem(this.token, token);
+    }
+
+    getToken() {
+      return localStorage.getItem(this.token);
+    }
+
+    removeToken() {
+      localStorage.removeItem(this.token);
+    }
+
+    isLoggedIn() {
+      return !!this.getToken();
     }
   
 }
