@@ -17,6 +17,7 @@ import { ProductComponent } from './product/product.component';
 
 import { AuthInterceptor } from './auth.interceptor';
 import { AuthGuard } from './auth.guard';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AuthGuard } from './auth.guard';
     LoginComponent,
     RegisterComponent,
     OrderComponent,
-    ProductComponent
+    ProductComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
