@@ -23,7 +23,10 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER, 
     totalPrice: DataTypes.DECIMAL(10, 2),
     shippingAddress: DataTypes.STRING,
-    orderStatus: DataTypes.STRING,
+    orderStatus: {
+      type: DataTypes.STRING,
+      defaultValue: 'Packing your order',
+    },
   }, {
     sequelize,
     modelName: 'Order',

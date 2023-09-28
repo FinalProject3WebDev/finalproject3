@@ -14,4 +14,9 @@ export class ProductService {
   getAllProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.baseUrl}/products`)
   }
+
+  // add to cart by getting the product id
+  addToCart(cartItem: { productId: number, quantity: number }): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/cart/${cartItem.productId}`, { quantity: cartItem.quantity });
+  }
 }

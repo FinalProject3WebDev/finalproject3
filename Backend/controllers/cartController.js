@@ -124,7 +124,7 @@ class CartController {
         })
             .then(deletedRows => {
                 if (deletedRows > 0) {
-                    res.status(204).json({ message: 'Cart item deleted successfully' });
+                    res.status(200).json({ message: 'Cart item deleted successfully' });
                 } else {
                     res.status(404).json({ message: 'Cart item not found' });
                 }

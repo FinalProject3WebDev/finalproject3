@@ -9,7 +9,12 @@ export class OrderService {
 
   constructor(private http: HttpClient) { }
 
-  addOrder(orderData: any) {
-    return this.http.post(this.apiUrl + '/orders/create', orderData);
+  createOrder(shippingAddress: string) {
+    return this.http.post(`${this.apiUrl}/order/create`, shippingAddress);
   }
+
+  getOrders() {
+    return this.http.get(`${this.apiUrl}/order/history`);
+  }
+
 }

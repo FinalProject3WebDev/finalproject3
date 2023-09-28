@@ -22,7 +22,7 @@ export class CartComponent implements OnInit {
           this.cartItems = response.cartItems;
           this.totalPrice = response.totalPrice;
         } else {
-          this.cartItems = []; // Set it to an empty array if the response is not as expected
+          this.cartItems = []; 
         }
       },
       (error) => {
@@ -33,20 +33,16 @@ export class CartComponent implements OnInit {
 
   checkout(): void {
     // json body to send to the backend
-    const orderData = {
-      cartItems: this.cartItems,
-      shippingAddress: 'Jalan Ganesha No.10 Bandung, Jawa Barat 19234',
-    };
+    const shippingAddress = '123 Main St, City';
 
-    // add order
-    this.orderService.addOrder(orderData).subscribe(
-      response => {
-        console.log('Order added successfully', response);
-
+    this.orderService.createOrder(shippingAddress).subscribe(
+      (response: any) => {
+        window.location.href = '/orders';
       },
-      error => {
-        console.error('Failed to add the order', error);
+      (error) => {
+        console.error('Failed to create order', error);
       }
     );
+   
   }
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { OrderService } from '../services/order.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-order',
@@ -8,28 +10,12 @@ import { Component, OnInit } from '@angular/core';
 export class OrderComponent implements OnInit {
   orders: any[] = [];
   
-  constructor() { }
+  constructor(private http: HttpClient, private orderService: OrderService) { }
 
   ngOnInit(): void {
-    this.orders = [
-      {
-        id: 1234,
-        totalPrice: 150.0,
-        shippingAddress: '123 Main St, City',
-        items: [
-          { productName: 'Television', quantity: 1 },
-          { productName: 'Earphone', quantity: 1 }
-        ]
-      },
-      {
-        id: 12,
-        totalPrice: 200.0,
-        shippingAddress: '456 Elm St, Town',
-        items: [
-          { productName: 'Handphone', quantity: 1 }
-        ]
-      }
-    ];
+    this.orderService.getOrders().subscribe((data: any) => {
+      this.orders = data;
+    });
   }
 }
 
