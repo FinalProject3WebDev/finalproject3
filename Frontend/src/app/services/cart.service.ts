@@ -16,4 +16,8 @@ export class CartService {
   addToCart(productId: number) {
     return this.http.post(`${this.apiUrl}/cart/${productId}`, {});
   }
+
+  deleteCartItem(cartItemId: number) {
+    return this.http.delete(`${this.apiUrl}/cart/${cartItemId}`);
+  }
 }

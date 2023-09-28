@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../services/order.service';
 import { CartService } from '../services/cart.service';
+import { UserService } from '../services/user.service';
+import { ProductService } from '../services/product.service';
+import { CartItem } from '../interfaces/cart';
 
 @Component({
   selector: 'app-cart',
@@ -11,10 +14,16 @@ export class CartComponent implements OnInit {
   cartItems: any[] = []; 
   totalPrice = 0;
   shippingCost = 10; 
+  shippingAddress = '';
 
-  constructor(private cartService: CartService, private orderService: OrderService) { }
+  constructor(private cartService: CartService, private orderService: OrderService, private userService: UserService, private productService : ProductService ) { }
 
   ngOnInit(): void {
+    // get shipping address
+    this.userService.getUserProfile().subscribe((data: any) => {
+      this.shippingAddress = data.user.address;
+    })
+
     // display cart items
     this.cartService.getCartItems().subscribe(
       (response: any) => {
@@ -32,7 +41,6 @@ export class CartComponent implements OnInit {
   }
 
   checkout(): void {
-    // json body to send to the backend
     const shippingAddress = '123 Main St, City';
 
     this.orderService.createOrder(shippingAddress).subscribe(
@@ -43,6 +51,33 @@ export class CartComponent implements OnInit {
         console.error('Failed to create order', error);
       }
     );
-   
+  }
+
+  increaseQuantity(item: CartItem): void {
+    const cartItem = {
+      productId: item.productId,
+      quantity: 1
+    }
+    this.productService.addToCart(cartItem).subscribe(() => {
+      window.location.reload();
+    });
+  }
+
+  decreaseQuantity(item: CartItem): void {
+    const cartItem = {
+      productId: item.productId,
+      quantity: -1
+    }
+
+    const newQuantity = item.quantity - 1;
+    if (newQuantity === 0) {
+      this.cartService.deleteCartItem(item.id).subscribe(() => {
+        window.location.reload();
+      });
+    } else {
+      this.productService.addToCart(cartItem).subscribe(() => {
+        window.location.reload();
+      });
+    }
   }
 }

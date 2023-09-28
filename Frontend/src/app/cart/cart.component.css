@@ -1,0 +1,8 @@
+.quantity-text {
+    display: inline-block;
+    min-width: 50px; 
+    padding: 5px 10px; 
+    text-align: center;
+    border: 1px solid #ccc; 
+    vertical-align: middle;
+}
