@@ -21,6 +21,7 @@ router.post('/login', UserController.login);
 // Authentication
 router.use(authentication);
 router.get('/profile', UserController.getUserProfile);
+router.put('/profile/edit', UserController.editProfile);
 
 // Cart 
 router.get('/cart/mycart', CartController.getCartItems);

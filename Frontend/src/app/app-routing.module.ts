@@ -7,6 +7,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { OrderComponent } from './order/order.component';
 import { ProductComponent } from './product/product.component';
 import { ProfileComponent } from './profile/profile.component';
+import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/products', pathMatch: 'full' },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'login', component:LoginComponent},
   { path: 'register', component:RegisterComponent},
   { path: 'orders', component: OrderComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] }
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'profile/edit', component: EditProfileComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

@@ -18,6 +18,7 @@ import { ProductComponent } from './product/product.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { AuthGuard } from './auth.guard';
 import { ProfileComponent } from './profile/profile.component';
+import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ProfileComponent } from './profile/profile.component';
     RegisterComponent,
     OrderComponent,
     ProductComponent,
-    ProfileComponent
+    ProfileComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
