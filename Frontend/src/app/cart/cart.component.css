@@ -1,3 +1,8 @@
+.container {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+}
+
 .quantity-text {
     display: inline-block;
     min-width: 50px; 
@@ -6,3 +11,16 @@
     border: 1px solid #ccc; 
     vertical-align: middle;
 }
+
+.button {
+    background-color: #e9e2d2;
+    padding: 1rem 1.25rem;
+    border-radius: .5rem;
+    transition: .3s;
+    border: none;
+}
+
+.button:hover {
+    background-color: #e2d0ad;
+  }
+  

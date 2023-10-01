@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../services/order.service';
 import { CartService } from '../services/cart.service';
+import { User } from '../interfaces/user';
 import { UserService } from '../services/user.service';
 import { ProductService } from '../services/product.service';
 import { CartItem } from '../interfaces/cart';
@@ -12,9 +13,12 @@ import { CartItem } from '../interfaces/cart';
 })
 export class CartComponent implements OnInit {
   cartItems: any[] = []; 
+  user!: User;
+
   totalPrice = 0;
   shippingCost = 10; 
   shippingAddress = '';
+  name = '';
 
   constructor(private cartService: CartService, private orderService: OrderService, private userService: UserService, private productService : ProductService ) { }
 
@@ -22,6 +26,7 @@ export class CartComponent implements OnInit {
     // get shipping address
     this.userService.getUserProfile().subscribe((data: any) => {
       this.shippingAddress = data.user.address;
+      this.name = data.user.name;
     })
 
     // display cart items
