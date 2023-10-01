@@ -18,9 +18,9 @@ router.post('/login', UserController.login);
 
 // -------------------------- ROUTES YANG PERLU AUTORISASI --------------------------
 // router.use(authorization)
-router.post('/products', isAdmin, ProductController.createProduct);
-router.delete('/products/:productId', isAdmin, ProductController.deleteProduct);
-// router.put('/products/:productId', ProductController.editProduct);
+router.post('/products', ProductController.createProduct);
+router.delete('/products/:productId', ProductController.deleteProduct);
+router.put('/products/:productId', ProductController.editProduct);
 
 // -------------------------- ROUTES YANG PERLU AUTENTIKASI --------------------------
 
