@@ -82,13 +82,46 @@ class UserController {
                   if (!foundUser) {
                      return res.status(404).json({ message: 'User not found' });
                   }
-   
+
                   res.status(200).json({ message: 'User found', user: foundUser });
                })
                .catch(error => {
                   console.error(error);
                   res.status(500).json({ message: 'Failed to find user' });
                });
+    }
+
+    static async editProfile(req, res) {
+      const { id } = res.locals.user;
+      const { name, email, address, phoneNumber } = req.body;
+    
+      try {
+        const user = await User.findByPk(id);
+    
+        if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+        }
+    
+        if (name) {
+          user.name = name;
+        }
+        if (email) {
+          user.email = email;
+        }
+        if (address) {
+          user.address = address;
+        }
+        if (phoneNumber) {
+          user.phoneNumber = phoneNumber;
+        }
+    
+        await user.save();
+    
+        res.status(200).json({ message: 'User profile updated successfully', user: user });
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Failed to update user profile' });
+      }
     }
 }
 

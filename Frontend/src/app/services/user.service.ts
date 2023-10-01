@@ -14,4 +14,8 @@ export class UserService {
   getUserProfile(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/profile`);
   }
+
+  editUserProfile(user: any): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/profile/edit`, user);
+  }
 }

@@ -27,6 +27,7 @@ router.delete('/products/:productId', isAdmin, ProductController.deleteProduct);
 // Authentication
 router.use(authentication);
 router.get('/profile', UserController.getUserProfile);
+router.put('/profile/edit', UserController.editProfile);
 
 // Cart 
 router.get('/cart/mycart', CartController.getCartItems);

@@ -23,6 +23,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faShoppingCart, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faShoppingCart, faInfoCircle);
+import { ProfileComponent } from './profile/profile.component';
+import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ library.add(faShoppingCart, faInfoCircle);
     OrderComponent,
     ProductComponent,
     HomepageComponent
+    ProfileComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
