@@ -10,7 +10,7 @@ module.exports = {
         productDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         price: 2900000, 
         stock: 50,
-        productImage: './images/headphone.png',
+        productImage: '../images/headphone.png',
         createdAt: new Date(),
         updatedAt: new Date(),
       },

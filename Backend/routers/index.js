@@ -3,18 +3,24 @@ const UserController = require('../controllers/userController');
 const CartController = require('../controllers/cartController');
 const OrderController = require('../controllers/orderController');
 const ProductController = require('../controllers/productController');
+const ProductCategoryController = require('../controllers/productCategoryController');
+const { isAdmin } = require('../middleware/authorization'); 
 
 const { authentication, sendUserData } = require('../middleware/authentication');
 
 // Product
 router.get('/products', ProductController.getAllProducts);
-// router.post('/products', ProductController.addProduct);
-// router.put('/products/:productId', ProductController.editProduct);
-// router.delete('/products/:productId', ProductController.deleteProduct);
+router.get('/categories', ProductCategoryController.getAllCategories);
 
 // Users 
 router.post('/register', UserController.register);
 router.post('/login', UserController.login);
+
+// -------------------------- ROUTES YANG PERLU AUTORISASI --------------------------
+// router.use(authorization)
+router.post('/products', isAdmin, ProductController.createProduct);
+router.delete('/products/:productId', isAdmin, ProductController.deleteProduct);
+// router.put('/products/:productId', ProductController.editProduct);
 
 // -------------------------- ROUTES YANG PERLU AUTENTIKASI --------------------------
 

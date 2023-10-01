@@ -17,6 +17,12 @@ import { ProductComponent } from './product/product.component';
 
 import { AuthInterceptor } from './auth.interceptor';
 import { AuthGuard } from './auth.guard';
+import { HomepageComponent } from './homepage/homepage.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faShoppingCart, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faShoppingCart, faInfoCircle);
 
 @NgModule({
   declarations: [
@@ -26,7 +32,8 @@ import { AuthGuard } from './auth.guard';
     LoginComponent,
     RegisterComponent,
     OrderComponent,
-    ProductComponent
+    ProductComponent,
+    HomepageComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +46,7 @@ import { AuthGuard } from './auth.guard';
       positionClass: 'toast-top-right', // You can customize the position
       closeButton: true, // Show a close button on the toast
     }),
+    FontAwesomeModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

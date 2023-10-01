@@ -6,9 +6,11 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { OrderComponent } from './order/order.component';
 import { ProductComponent } from './product/product.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/products', pathMatch: 'full' },
+  { path: '', redirectTo: '/', pathMatch: 'full' },
+  { path: 'homepage', component: HomepageComponent },
   { path: 'products', component: ProductComponent},
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
   { path: 'login', component:LoginComponent},
