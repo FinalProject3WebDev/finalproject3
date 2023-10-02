@@ -50,7 +50,7 @@ export class ProductComponent implements OnInit {
     };
 
     this.productService.addToCart(cartItem).subscribe((data: any) => {
-      console.log(productId);
+      console.log("product id:", productId);
     });
   }
 }

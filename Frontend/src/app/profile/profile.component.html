@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container">
   <h1 class="mb-3">My Profile</h1>
   <div class="card">
     <div class="card-body">
@@ -7,7 +7,7 @@
       <p class="card-text">Address: {{ user.address }}</p>
       <p class="card-text">Phone Number: {{ user.phoneNumber || 'N/A' }}</p>
 
-      <button class="btn btn-primary" (click)="editProfile()">Edit Profile</button>
+      <button class="button btn-primary" (click)="editProfile()">Edit Profile</button>
     </div>
   </div>
 </div>
