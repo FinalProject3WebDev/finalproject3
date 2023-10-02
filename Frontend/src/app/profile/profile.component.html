@@ -1,12 +1,10 @@
 <div class="container">
-  <h1 class="mb-3">My Profile</h1>
+  <h1 class="mb-3">Hello, {{ user.name }}!</h1>
   <div class="card">
     <div class="card-body">
-      <h2 class="card-title">{{ user.name }}</h2>
       <p class="card-text">Email: {{ user.email }}</p>
       <p class="card-text">Address: {{ user.address }}</p>
       <p class="card-text">Phone Number: {{ user.phoneNumber || 'N/A' }}</p>
-
       <button class="button btn-primary" (click)="editProfile()">Edit Profile</button>
     </div>
   </div>

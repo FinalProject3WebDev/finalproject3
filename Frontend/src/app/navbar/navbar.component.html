@@ -23,6 +23,7 @@
         <li class="nav__item" *ngIf="isLoggedIn" class="dropdown">
           <a class="nav__link dropdown-toggle">Menu</a>
           <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
             <li><a class="dropdown-item" routerLink="/cart">Cart</a></li>
             <li><a class="dropdown-item" routerLink="/orders">My Order</a></li>
             <li><a class="dropdown-item" (click)="onLogout()">Logout</a></li>

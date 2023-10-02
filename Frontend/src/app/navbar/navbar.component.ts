@@ -1,53 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
-  // isNavMenuVisible = false;
-  // isScrolled = false;
+export class NavbarComponent implements OnInit {
+  isLoggedIn: boolean = false;
+  isNotLoggedIn: boolean = false;
 
-  // ngOnInit() {
-  //   // Kode JavaScript untuk menampilkan dan menyembunyikan menu
-  //   const navToggle = document.getElementById("nav-toggle");
-  //   const navClose = document.getElementById("nav-close");
-  //   const navLink = document.querySelectorAll(".nav__link");
+  constructor(private authService: AuthService, private router: Router) { }
 
-  //   if (navToggle) {
-  //     navToggle.addEventListener("click", () => {
-  //       this.isNavMenuVisible = true;
-  //     });
-  //   }
+  ngOnInit(): void {
+    this.isLoggedIn = this.authService.isLoggedIn();
+    this.isNotLoggedIn = !this.authService.isLoggedIn();
+  }
 
-  //   if (navClose) {
-  //     navClose.addEventListener("click", () => {
-  //       this.isNavMenuVisible = false;
-  //     });
-  //   }
-
-  //   navLink.forEach((n: Element) => {
-  //     n.addEventListener("click", () => {
-  //       this.isNavMenuVisible = false;
-  //     });
-  //   });
-
-  //   // Kode JavaScript untuk mengontrol header saat menggulir
-  //   window.addEventListener("scroll", () => {
-  //     if (window.scrollY >= 50) {
-  //       this.isScrolled = true;
-  //     } else {
-  //       this.isScrolled = false;
-  //     }
-  //   });
-  // }
-
-  // toggleNavMenu() {
-  //   this.isNavMenuVisible = !this.isNavMenuVisible;
-  // }
-
-  // closeNavMenu() {
-  //   this.isNavMenuVisible = false;
-  // }
+  onLogout(): void {
+    this.authService.removeToken();
+    this.router.navigate(['/login']);
+  }
 }
