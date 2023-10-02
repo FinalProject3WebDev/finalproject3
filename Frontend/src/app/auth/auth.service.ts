@@ -3,47 +3,45 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000'
+  private apiUrl = 'http://localhost:3000';
   private token = 'accessToken';
-    constructor(private http : HttpClient) {}
+  constructor(private http: HttpClient) {}
 
-    registerUser(userData: any) {
-      return this.http.post(`${this.apiUrl}/register`, userData).pipe(
-        catchError(error => {
-          console.error('Observable error:', error);
-          throw error;
-        })
-      )
-    }
-    // register(user: any): Observable<any> {
-    //   const url = `${this.apiUrl}/register`;
-    //   return this.http.post(url, user);
-    // }
-    
-    login(credentials: { email: string; password: string }): Observable<any> {
-      const url = `${this.apiUrl}/login`;
-      return this.http.post(url, credentials);
-    }
+  registerUser(userData: any) {
+    return this.http.post(`${this.apiUrl}/register`, userData).pipe(
+      catchError((error) => {
+        console.error('Observable error:', error);
+        throw error;
+      })
+    );
+  }
+  // register(user: any): Observable<any> {
+  //   const url = `${this.apiUrl}/register`;
+  //   return this.http.post(url, user);
+  // }
 
-    setToken(token: string) {
-      localStorage.setItem(this.token, token);
-    }
+  login(credentials: { email: string; password: string }): Observable<any> {
+    const url = `${this.apiUrl}/login`;
+    return this.http.post(url, credentials);
+  }
 
-    getToken() {
-      return localStorage.getItem(this.token);
-    }
+  setToken(token: string) {
+    localStorage.setItem(this.token, token);
+  }
 
-    removeToken() {
-      localStorage.removeItem(this.token);
-    }
+  getToken() {
+    return localStorage.getItem(this.token);
+  }
 
-    isLoggedIn() {
-      return !!this.getToken();
-    }
-  
+  removeToken() {
+    localStorage.removeItem(this.token);
+  }
+
+  isLoggedIn() {
+    return !!this.getToken();
+  }
 }

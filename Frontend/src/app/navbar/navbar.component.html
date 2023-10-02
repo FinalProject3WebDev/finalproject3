@@ -1,36 +1,37 @@
-
 <header class="header" id="header">
-    <nav class="nav container">
-  
-      <div class="nav__toggle" id="nav-toggle">
-        <i class="ri-function-line"></i>
+  <nav class="nav container">
+    <div class="nav__toggle" id="nav-toggle">
+      <i class="ri-function-line"></i>
+    </div>
+    <div class="nav__menu" id="nav-menu">
+      <ul class="nav__list">
+        <li class="nav__item">
+          <a class="nav__link active-link" routerLink="/homepage">Home</a>
+        </li>
+        <li class="nav__item">
+          <a class="nav__link" routerLink="/products">Products</a>
+        </li>
+        <li class="nav__item">
+          <a class="nav__link" routerLink="/about">About</a>
+        </li>
+        <li class="nav__item" *ngIf="isNotLoggedIn">
+          <a class="nav__link" routerLink="/register">Register</a>
+        </li>
+        <li class="nav__item" *ngIf="isNotLoggedIn">
+          <a class="nav__link" routerLink="/login">Login</a>
+        </li>
+        <li class="nav__item" *ngIf="isLoggedIn" class="dropdown">
+          <a class="nav__link dropdown-toggle">Menu</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="/cart">Cart</a></li>
+            <li><a class="dropdown-item" routerLink="/orders">My Order</a></li>
+            <li><a class="dropdown-item" (click)="onLogout()">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="nav__close" id="nav-close">
+        <i class="ri-close-line"></i>
       </div>
-  
-      <div class="nav__menu" id="nav-menu">
-        <ul class="nav__list">
-          <li class="nav__item">
-            <a class="nav__link active-link" routerLink="/homepage">Home</a>
-          </li>
-          <li class="nav__item">
-            <a class="nav__link" routerLink="/products">Products</a>
-          </li>
-          <li class="nav__item">
-            <a class="nav__link" routerLink="/about">About</a>
-          </li>
-          <li class="nav__item">
-            <a class="nav__link" routerLink="/contact">Contact</a>
-          </li>
-          <li class="nav__item">
-            <a class="nav__link" routerLink="/cart">Cart</a>
-          </li>
-          <li class="nav__item">
-            <a class="nav__link" routerLink="/orders">My Orders</a>
-          </li>
-        </ul>
-  
-        <div class="nav__close" id="nav-close">
-          <i class="ri-close-line"></i>
-        </div>
-      </div>
-    </nav>
+    </div>
+  </nav>
 </header>
