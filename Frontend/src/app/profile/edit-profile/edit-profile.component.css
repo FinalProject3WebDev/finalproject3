@@ -1,0 +1,17 @@
+.card {
+    margin-top: 6rem;
+    margin-left: 120px;
+    margin-right: 120px;
+}
+
+.button {
+    background-color: #e9e2d2;
+    padding: 0.5rem 1.25rem;
+    border-radius: .5rem;
+    transition: .3s;
+    border: none;
+}
+
+.button:hover {
+    background-color: #e2d0ad;
+  }

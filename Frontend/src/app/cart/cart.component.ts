@@ -46,9 +46,7 @@ export class CartComponent implements OnInit {
   }
 
   checkout(): void {
-    const shippingAddress = '123 Main St, City';
-
-    this.orderService.createOrder(shippingAddress).subscribe(
+    this.orderService.createOrder(this.shippingAddress).subscribe(
       (response: any) => {
         window.location.href = '/orders';
       },
