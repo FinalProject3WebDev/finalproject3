@@ -15,6 +15,10 @@ function authentication(req, res, next) {
                 res.locals.user = foundUser;
                 console.log(payload);
 
+                if (foundUser.role !== 'admin') {
+                    return res.status(403).send("Access denied. Admin role required.");
+                }
+
                 next(); 
             })
             .catch(err => {

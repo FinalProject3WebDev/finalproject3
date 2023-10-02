@@ -13,7 +13,7 @@
     <div class="section-jumper__main">
       <ul>
         <li *ngFor="let category of categories" (click)="getProductsByCategory(category)">
-          {{ category.categoryName }}
+          <a>{{ category.categoryName }}</a>
         </li>
       </ul>
     </div>

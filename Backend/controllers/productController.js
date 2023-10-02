@@ -13,34 +13,42 @@ class ProductController {
 
   async createProduct(req, res) {
     try {
-      const {
-        categoryId,
-        productName,
-        productDescription,
-        price,
-        stock,
-        productImage,
-      } = req.body;
+        if (res.locals.user.role !== 'admin') {
+            return res.status(403).json({ message: 'Permission denied. Only admin can create products.' });
+        }
 
-      const newProduct = await Product.create({
-        categoryId,
-        productName,
-        productDescription,
-        price,
-        stock,
-        productImage,
-      });
+        const {
+            categoryId,
+            productName,
+            productDescription,
+            price,
+            stock,
+            productImage,
+        } = req.body;
 
-      res.status(201).json(newProduct);
+        const newProduct = await Product.create({
+            categoryId,
+            productName,
+            productDescription,
+            price,
+            stock,
+            productImage,
+        });
+
+        res.status(201).json(newProduct);
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Failed to create a new product" });
+        console.error(error);
+        res.status(500).json({ message: 'Failed to create a new product' });
     }
   }
 
   async deleteProduct(req, res) {
     const productId = req.params.productId;
     try {
+      if (res.locals.user.role !== 'admin') {
+        return res.status(403).json({ message: 'Permission denied' });
+      }
+
       const deletedProduct = await Product.destroy({
         where: {
           id: productId,
@@ -65,6 +73,9 @@ class ProductController {
     const { productName, productDescription, price, stock } = req.body;
 
     try {
+      if (res.locals.user.role !== 'admin') {
+        return res.status(403).json({ message: 'Permission denied' });
+      }
       // Find produk berdasarkan ID
       const product = await Product.findByPk(productId);
 

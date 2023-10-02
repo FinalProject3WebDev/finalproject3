@@ -26,9 +26,9 @@ class UserController {
         
             // Create user with the hashed password
             await User.create({ name, email, password: hashedPassword, role, address });
+            console.log("user",user)
         
             return res.status(201).send(`Successfully registered, name: ${name}`);
-            console.log("user",user)
         } catch (error) {
             console.error(error);
             return res.status(500).send('Internal Server Error')

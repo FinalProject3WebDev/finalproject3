@@ -160,6 +160,9 @@ img {
   -webkit-transition: border-color .3s ease,background-color .3s ease;
   transition: border-color .3s ease,background-color .3s ease;
   display: inline-block;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
   margin-bottom: -1px;
   text-align: center;
   height: 100%;
@@ -195,12 +198,12 @@ a, a:hover {
 .products__container {
   grid-template-columns: repeat(3, 1fr);
   gap: 5rem 1.5rem;
-  padding-top: 3rem;
+  padding-top: 6rem;
 }
 
 .products__card {
   position: relative;
-  height: 132px;
+  height: 348px;
   background-color: #f4ebe2;
   padding: .75rem;
   border-radius: .5rem;

@@ -17,10 +17,9 @@ router.post('/register', UserController.register);
 router.post('/login', UserController.login);
 
 // -------------------------- ROUTES YANG PERLU AUTORISASI --------------------------
-// router.use(authorization)
-router.post('/products', ProductController.createProduct);
-router.delete('/products/:productId', ProductController.deleteProduct);
-router.put('/products/:productId', ProductController.editProduct);
+router.post('/products', authentication, isAdmin, ProductController.createProduct); 
+router.delete('/products/:productId', authentication, isAdmin, ProductController.deleteProduct); 
+router.put('/products/:productId', authentication, isAdmin, ProductController.editProduct); 
 
 // -------------------------- ROUTES YANG PERLU AUTENTIKASI --------------------------
 
@@ -40,4 +39,3 @@ router.get('/order/history', OrderController.getOrders);
 router.delete('/order/:orderId', OrderController.deleteOrderById);
 
 module.exports = router;
-
