@@ -83,4 +83,8 @@ export class CartComponent implements OnInit {
       });
     }
   }
+
+  editProfile(): void {
+    window.location.href = '/profile/edit';
+  }
 }

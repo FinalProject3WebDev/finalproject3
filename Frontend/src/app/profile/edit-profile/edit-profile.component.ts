@@ -34,6 +34,11 @@ export class EditProfileComponent implements OnInit {
     )
   }
 
+  editUserProfile(): void {
+    this.onSubmit();
+    this.navigateToProfile();
+  }
+
   navigateToProfile(): void {
     this.router.navigate(['/profile']);
   }

@@ -1,5 +1,5 @@
 <div class="container">
-  <h1 class="mb-3">My Orders</h1>
+  <h1 class="title mb-3">My Orders</h1>
   <div *ngFor="let order of orders" class="mb-4">
       <div class="card">
           <div class="card-header">
@@ -16,7 +16,7 @@
                       <p class="card-text">{{ order.orderStatus }}</p>
                   </div>
               </div>
-              <h5 class="card-title mt-3">Ordered Products</h5>
+              <h5 class="card-title-product mt-3">Ordered Products</h5>
               <ul class="list-group">
                   <li *ngFor="let item of order.OrderItems" class="list-group-item">
                       <div class="row mb-4">
@@ -24,20 +24,20 @@
                               <img [src]="item.Product.productImage" alt="Product Image" class="img-thumbnail">
                           </div>
                           <div class="col-md-10">
-                              <h3 class="mb-2">{{ item.Product.productName }}</h3>
+                              <h5 class="mb-2">{{ item.Product.productName }}</h5>
                               <p class="mb-2">{{ item.Product.productDescription }}</p>
                               <div class="d-flex justify-content-between align-items-center">
                                   <div>
                                       <p class="mb-2">Quantity: {{ item.quantity }}</p>
                                   </div>
-                                  <h4 class="text-right">Rp. {{ item.price }}</h4>
+                                  <h5 class="text-right">Rp. {{ item.price }}</h5>
                               </div>
                           </div>
                       </div>
                   </li>
               </ul>
               <div class="border-top mt-4 pt-3 text-right">
-                  <span class="float-right h5">Total Price: ${{ order.totalPrice }}</span>
+                  <span class="float-right h5">Total Price: Rp.{{ order.totalPrice }}</span>
               </div>
           </div>
       </div>
