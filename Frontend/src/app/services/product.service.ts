@@ -16,8 +16,35 @@ export class ProductService {
   }
 
   getProductsByCategory(categoryId: string) {
-    const url = `${this.baseUrl}?categoryId=${categoryId}`;
+    const url = `${this.baseUrl}/products?categoryId=${categoryId}`;
     return this.http.get(url);
+  }
+
+  createProduct(params: {
+    categoryId: number,
+    productName: string,
+    productDescription: string,
+    price: number,
+    stock: number,
+    productImage: string,
+}) {
+    const url = `${this.baseUrl}/products`;
+    return this.http.post(url, params);
+  }
+
+  deleteProduct(productId: string|number) {
+    const url = `${this.baseUrl}/products/${productId}`;
+    return this.http.delete(url);
+  }
+
+  editProduct(productId: string|number, params: {
+    productName: string,
+    productDescription: string,
+    price: any,
+    stock: any,
+  }) {
+    const url = `${this.baseUrl}/products/${productId}`;
+    return this.http.put(url, params);
   }
 
   // add to cart by getting the product id

@@ -2,6 +2,8 @@
     margin-top:5rem;
     margin-left: 1.5rem;
     margin-right: 1.5rem;
+    width: 90%;
+    padding-left: 90px;
 }
 
 .quantity-text {
@@ -15,7 +17,7 @@
 
 .button {
     background-color: #e9e2d2;
-    padding: 1rem 1.25rem;
+    padding: 0.5rem 1.25rem;
     border-radius: .5rem;
     transition: .3s;
     border: none;
@@ -24,4 +26,6 @@
 .button:hover {
     background-color: #e2d0ad;
   }
+
+
   

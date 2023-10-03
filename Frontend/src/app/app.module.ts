@@ -20,11 +20,14 @@ import { AuthGuard } from './auth.guard';
 import { HomepageComponent } from './homepage/homepage.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faShoppingCart, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faInfoCircle, faTrash, faPencil, faPlus } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faShoppingCart, faInfoCircle);
+library.add(faShoppingCart, faInfoCircle, faTrash, faPencil, faPlus);
 import { ProfileComponent } from './profile/profile.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
+import { MasterProductComponent } from './master-product/master-product.component';
+import { DataTablesModule } from 'angular-datatables';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +39,8 @@ import { EditProfileComponent } from './profile/edit-profile/edit-profile.compon
     ProductComponent,
     HomepageComponent,
     ProfileComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    MasterProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,9 @@ import { EditProfileComponent } from './profile/edit-profile/edit-profile.compon
       positionClass: 'toast-top-right', // You can customize the position
       closeButton: true, // Show a close button on the toast
     }),
-    FontAwesomeModule
+    FontAwesomeModule,
+    DataTablesModule,
+    NgbModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

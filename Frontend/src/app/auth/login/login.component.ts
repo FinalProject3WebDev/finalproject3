@@ -31,6 +31,9 @@ export class LoginComponent {
           const accessToken = response.accessToken;
           localStorage.setItem('accessToken', accessToken); // Store the token in localStorage
 
+          const user = response;
+          localStorage.setItem('user', JSON.stringify(user)); // Store the user role in localStorage
+
           // Log the token to the console
           console.log('Access Token:', accessToken);
           // console.log('123')

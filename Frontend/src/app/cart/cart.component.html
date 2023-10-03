@@ -6,12 +6,12 @@
             <div class="card shadow-sm mb-4">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             <h3 class="mb-3">{{ name }}</h3>
                             <p>{{ shippingAddress }}</p>
                         </div>
-                        <div class="col-md-2">
-                            <button class="button">Change Address</button>
+                        <div class="address-btn col-md-4">
+                         <button class="button" (click)="editProfile()">Change Address</button>
                         </div>
                     </div>
                 </div>

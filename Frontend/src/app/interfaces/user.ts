@@ -9,3 +9,10 @@ export interface User {
     createdAt: string;
     updatedAt: string;
   }
+
+  export interface UserCredential {
+    accessToken?: string;
+    email?:       string;
+    role?:        string;
+    id?:          number;
+}

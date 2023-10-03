@@ -18,9 +18,9 @@ export class ProductComponent implements OnInit {
 
   quantity: number = 1;
   faShoppingCart = faShoppingCart;
-  
+
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private productService: ProductService,
     private productCategoryService: ProductCategoryService
   ) { }
@@ -37,7 +37,7 @@ export class ProductComponent implements OnInit {
   }
 
   getProductsByCategory(category: ProductCategory) {
-    this.selectedCategory = category; 
+    this.selectedCategory = category;
     this.productService.getProductsByCategory(category.id.toString()).subscribe((data: any) => {
       const firstProduct = data[0];
     });

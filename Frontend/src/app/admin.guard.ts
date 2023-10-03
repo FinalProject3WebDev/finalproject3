@@ -5,14 +5,14 @@ import { AuthService } from '../app/auth/auth.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard {
+export class AdminGuard {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this.authService.getToken()) {
+    if (this.authService.getToken() && JSON.parse(this.authService.getUser() as string).role == 'admin') {
       return true;
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/homepage']);
       return false;
     }
   }

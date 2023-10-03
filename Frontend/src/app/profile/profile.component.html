@@ -2,9 +2,16 @@
   <h1 class="mb-3">Hello, {{ user.name }}!</h1>
   <div class="card">
     <div class="card-body">
-      <p class="card-text">Email: {{ user.email }}</p>
-      <p class="card-text">Address: {{ user.address }}</p>
-      <p class="card-text">Phone Number: {{ user.phoneNumber || 'N/A' }}</p>
+      <div class="grid-container">
+        <div class="label"><strong>Email</strong></div>
+        <div class="value mb-2">{{ user.email }}</div>
+        <div class="label"><strong>Phone Number</strong></div>
+        <div class="value mb-2">{{ user.phoneNumber || 'N/A' }}</div>
+        <div class="address">
+          <div class="label"><strong>Address</strong></div>
+          <div class="value mb-5">{{ user.address }}</div>
+        </div>
+      </div>
       <button class="button btn-primary" (click)="editProfile()">Edit Profile</button>
     </div>
   </div>

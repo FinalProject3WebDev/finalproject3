@@ -1,0 +1,110 @@
+<section class="sectionJumper section">
+  <div
+    class="section-jumper section-jumper- section-jumper--light section-jumper--sticky section-jumper--initialized"
+  >
+    <div class="section-jumper__main">
+      <ul>
+        <li>
+          <a (click)="rerender()">Master Product</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="products section container" id="products" *ngIf="!is['edit']  && !is['create']">
+  <div class="card shadow p-4">
+    <table
+      datatable
+      [dtOptions]="dtOptions"
+      [dtTrigger]="dtTrigger"
+      class="table row-border hover"
+    >
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Product Name</th>
+          <th>Category</th>
+          <th>Product Description</th>
+          <th>Price</th>
+          <th>
+            <button type="button" class="btn btn-success btn-sm" (click)="createProduct()">
+              <fa-icon [icon]="faPlus" ></fa-icon>
+            </button>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products; index as i">
+          <td>{{ i + 1 }}</td>
+          <td>{{ product.productName }}</td>
+          <td>{{ product.category?.categoryName }}</td>
+          <td>{{ product.productDescription }}</td>
+          <td>{{ product.price }}</td>
+          <td>
+            <div
+              class="btn-group btn-group-sm"
+              role="group"
+              aria-label="Basic example"
+            >
+            <button type="button" class="btn btn-success btn-sm" (click)="editProduct(product)">
+              <fa-icon [icon]="faPencil" ></fa-icon>
+            </button>
+            <button type="button" class="btn btn-danger btn-sm" (click)="deleteProduct(product.id)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="container mt-5" *ngIf="!!is['edit'] || !!is['create']">
+  <div class="card">
+    <div class="card-header">
+      <h3>Edit Profile</h3>
+    </div>
+    <div class="card-body">
+      <form (submit)="onSubmit()">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" id="name" name="name" [(ngModel)]="formProduct.productName" class="form-control">
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Category</label>
+          <input [ngbTypeahead]="search" [inputFormatter]="formatter" [resultFormatter]="formatter" [editable]="false" type="text" id="category" name="category" [(ngModel)]="formProduct.category" class="form-control" [disabled]="is['edit']">
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Image</label>
+          <input type="text" id="image" name="image" [(ngModel)]="formProduct.productImage" class="form-control" [disabled]="is['edit']">
+        </div>
+
+        <div class="mb-3">
+          <label for="address" class="form-label">Description</label>
+          <textarea type="text" id="description" name="description" [(ngModel)]="formProduct.productDescription" class="form-control" ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="phoneNumber" class="form-label">Price</label>
+          <input type="number" id="price" name="price" [(ngModel)]="formProduct.price" class="form-control">
+        </div>
+
+        <div class="mb-3">
+          <label for="phoneNumber" class="form-label">Stock</label>
+          <input type="number" id="stock" name="stock" [(ngModel)]="formProduct.stock" class="form-control">
+        </div>
+
+        <div class="mb-3">
+          <div class="d-flex justify-content-between">
+            <button type="button" class="btn btn-secondary" (click)="cancelForm()">Cancel</button>
+            <button type="submit" class="button btn-primary">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

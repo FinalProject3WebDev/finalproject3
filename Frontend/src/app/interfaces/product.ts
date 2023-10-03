@@ -1,6 +1,7 @@
 export interface Product {
     id: number,
-    category: {
+    categoryId: number,
+    category?: {
         id: number,
         categoryName: string
     },

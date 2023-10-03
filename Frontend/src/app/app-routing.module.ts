@@ -9,11 +9,14 @@ import { ProductComponent } from './product/product.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
+import { MasterProductComponent } from './master-product/master-product.component';
+import { AdminGuard } from './admin.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/', pathMatch: 'full' },
+  { path: '', redirectTo: '/homepage', pathMatch: 'full' },
   { path: 'homepage', component: HomepageComponent },
   { path: 'products', component: ProductComponent},
+  { path: 'master-products', component: MasterProductComponent, canActivate: [AdminGuard]},
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
   { path: 'login', component:LoginComponent},
   { path: 'register', component:RegisterComponent},

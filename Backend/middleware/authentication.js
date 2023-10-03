@@ -6,7 +6,7 @@ function authentication(req, res, next) {
         const token = req.get('accessToken');
         const payload = verifyToken(token);
 
-        User.findOne({ where: { name: payload.name } })
+        User.findOne({ where: { id: payload.id } })
             .then(foundUser => {
                 if (!foundUser) {
                     return res.status(401).send("User does not exist");

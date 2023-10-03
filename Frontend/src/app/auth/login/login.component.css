@@ -1,0 +1,50 @@
+.custom-container {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+.left-side {
+    flex: 1;
+    padding-left: 70px;
+    align-items: center;
+    justify-content: center;
+    background-color: #e9e2d2;
+    padding-top: 250px;
+}
+
+.description {
+    margin-top: 20px;
+    font-size: 14px;
+    color:#3e3b35;
+    padding-right: 80px;
+}
+
+.right-side {
+    flex: 1;
+    padding: 20px;
+    padding-top: 120px;
+}
+
+  .register-here {
+    margin-top: 20px;
+  }
+
+.card {
+    width: 70%;
+    border: none;
+}
+
+.btn {
+    background-color: #e9e2d2;
+    padding: 0.5rem 1.25rem;
+    border-radius: .5rem;
+    transition: .3s;
+    border: none;
+    color: black;
+}
+
+.btn:hover {
+    background-color: #e2d0ad;
+}
+  

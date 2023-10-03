@@ -92,7 +92,7 @@ class UserController {
     }
 
     static async editProfile(req, res) {
-      const { id } = res.locals.user;
+      const id = res.locals.user.id;
       const { name, email, address, phoneNumber } = req.body;
     
       try {

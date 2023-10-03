@@ -11,6 +11,9 @@
         <li class="nav__item">
           <a class="nav__link" routerLink="/products">Products</a>
         </li>
+        <li class="nav__item" *ngIf="user?.role === 'admin'">
+          <a class="nav__link" routerLink="/master-products" >Master Products</a>
+        </li>
         <li class="nav__item">
           <a class="nav__link" routerLink="/about">About</a>
         </li>

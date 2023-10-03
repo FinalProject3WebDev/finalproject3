@@ -33,15 +33,24 @@ export class AuthService {
     localStorage.setItem(this.token, token);
   }
 
+  getUser() {
+    return localStorage.getItem("user");
+  }
+
   getToken() {
     return localStorage.getItem(this.token);
   }
 
+  removeUser() {
+    localStorage.removeItem("user");
+  }
   removeToken() {
     localStorage.removeItem(this.token);
   }
 
   isLoggedIn() {
+    console.log(!!this.getToken());
+
     return !!this.getToken();
   }
 }
