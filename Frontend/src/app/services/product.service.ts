@@ -15,14 +15,8 @@ export class ProductService {
     return this.http.get<Product[]>(`${this.baseUrl}/products`)
   }
 
-<<<<<<< Updated upstream
-  getProductsByCategory(categoryId: string) {
-    const url = `${this.baseUrl}/products?categoryId=${categoryId}`;
-    return this.http.get(url);
-=======
   getProductsByCategory(categoryId: number) {
     return this.http.get<Product[]>(`${this.baseUrl}/products?categoryId=${categoryId}`);
->>>>>>> Stashed changes
   }
 
   createProduct(params: {

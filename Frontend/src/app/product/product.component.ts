@@ -35,13 +35,6 @@ export class ProductComponent implements OnInit {
     });
   }
 
-<<<<<<< Updated upstream
-  getProductsByCategory(category: ProductCategory) {
-    this.selectedCategory = category;
-    this.productService.getProductsByCategory(category.id.toString()).subscribe((data: any) => {
-      const firstProduct = data[0];
-    });
-=======
   filterProductsByCategory(categoryName: string) {
     this.selectedCategory = categoryName;
     // console.log(this.selectedCategory = category)
@@ -52,8 +45,7 @@ export class ProductComponent implements OnInit {
       return this.products;
     }
   
-    return this.products.filter(product => product.category.categoryName  === this.selectedCategory);
->>>>>>> Stashed changes
+    return this.products.filter(product => product.category && product.category.categoryName === this.selectedCategory);
   }
 
   addToCart(productId: number) {
