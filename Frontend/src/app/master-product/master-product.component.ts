@@ -100,7 +100,7 @@ export class MasterProductComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    // Do not forget to unsubscribe the event
+    // do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
   }
 
@@ -142,12 +142,13 @@ export class MasterProductComponent implements OnInit {
           editPrice,
           editStock,
         } = this.formProduct;
+        
         this.productService
           .editProduct(this.formProduct.id, {
-            productName: editProductName,
-            productDescription: editProductDescription,
-            price: editPrice,
-            stock: editStock,
+            productName: this.formProduct.productName,
+            productDescription: this.formProduct.productDescription,
+            price: this.formProduct.price,
+            stock: this.formProduct.stock,
           })
           .subscribe((data: any) => {
             alert(data.message);
@@ -158,53 +159,54 @@ export class MasterProductComponent implements OnInit {
         break;
 
       case this.is['create']:
-        const {
-          category,
-          productName,
-          productDescription,
-          price,
-          stock,
-          productImage,
-        } = this.formProduct;
+        // const {
+        //   category,
+        //   productName,
+        //   productDescription,
+        //   price,
+        //   stock,
+        //   productImage,
+        // } = this.formProduct;
 
-        if (!productName) {
+        // if (!productName) {
+        if (!this.formProduct.productName) {
           alert("name field required!")
           return
         }
 
-        if (!category) {
+        if (!this.formProduct.category) {
           alert("category field required!")
           return
         }
 
-        if (!productDescription) {
+        if (!this.formProduct.productDescription) {
           alert("description field required!")
           return
         }
 
-        if (!price) {
+        if (!this.formProduct.price) {
           alert("price field required!")
           return
         }
 
-        if (!stock) {
+        if (!this.formProduct.stock) {
           alert("stock field required!")
           return
         }
 
-        if (!productImage) {
+        if (!this.formProduct.productImage) {
           alert("image field required!")
           return
         }
 
         this.productService
           .createProduct({
-            categoryId: category.id,
-            productName,
-            productDescription,
-            price,
-            stock,
-            productImage,
+            categoryId: this.formProduct.category.id,
+            productName: this.formProduct.productName,
+            productDescription: this.formProduct.productDescription,
+            price: this.formProduct.price,
+            stock: this.formProduct.stock,
+            productImage: this.formProduct.productImage
           })
           .subscribe((data: any) => {
             alert("Product has been created successfully");
