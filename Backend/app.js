@@ -10,6 +10,8 @@ app
    .use(express.json())
    .use(express.urlencoded({ extended: false }))
    .use(cors())
+   // .use(express.static('images'));
+
    // .use(bodyParser.json())
 
 app.use(router);

@@ -724,17 +724,15 @@ img {
 }
 
 .button--flex:hover {
-  background-color: #e2d0ad; /* Ganti dengan warna yang diinginkan */
-  color: #ffffff; /* Ganti dengan warna teks yang diinginkan */
+  background-color: #e2d0ad; 
+  color: #ffffff; 
 }
 
-/* Atur ukuran ikon keranjang */
 .fa-shopping-cart {
-  font-size: 24px; /* Atur ukuran ikon sesuai kebutuhan Anda */
-  margin-right: 8px; /* Aztur jarak antara ikon dan teks sesuai kebutuhan Anda */
+  font-size: 24px;
+  margin-right: 8px;
 }
 
-/* Ganti warna ikon keranjang */
 .fa-shopping-cart {
-  color: #333; /* Ganti dengan warna ikon yang diinginkan */
+  color: #333;
 }

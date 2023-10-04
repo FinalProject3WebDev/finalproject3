@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 .custom-container {
     display: flex;
     justify-content: space-between;
@@ -48,3 +49,16 @@
     background-color: #e2d0ad;
 }
   
+=======
+form button:hover {
+    background-color: #e2d0ad;
+}
+
+.btn-sign-in {
+    height: 38px;
+}
+
+.text-center a {
+    color: hsl(16, 11%, 38%);
+}
+>>>>>>> Stashed changes
