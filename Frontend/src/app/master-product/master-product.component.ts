@@ -136,12 +136,12 @@ export class MasterProductComponent implements OnInit {
   onSubmit() {
     switch (true) {
       case this.is['edit']:
-        const {
-          editProductName,
-          editProductDescription,
-          editPrice,
-          editStock,
-        } = this.formProduct;
+        // const {
+        //   editProductName,
+        //   editProductDescription,
+        //   editPrice,
+        //   editStock,
+        // } = this.formProduct;
         
         this.productService
           .editProduct(this.formProduct.id, {
