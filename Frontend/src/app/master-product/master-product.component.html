@@ -86,7 +86,8 @@
         </div> -->
         <div class="mb-3">
           <label for="image" class="form-label">Image</label>
-          <input type="file" id="image" name="image" (change)="onImageSelected($event)" class="form-control" [disabled]="is['edit']">
+          <!-- <input type="file" id="image" name="image" (change)="onImageSelected($event)" class="form-control" [disabled]="is['edit']"> -->
+          <input type="file" id="image" name="image" [(ngModel)]="formProduct.productImage" class="form-control" [disabled]="is['edit']">
         </div>        
 
         <div class="mb-3">
