@@ -25,7 +25,6 @@ export class ProductService {
     productDescription: string,
     price: number,
     stock: number,
-    productImage: string,
 }) {
     const url = `${this.baseUrl}/products`;
     return this.http.post(url, params);
@@ -41,11 +40,18 @@ export class ProductService {
     productDescription: string,
     price: any,
     stock: any,
+    categoryId: any
   }) {
-    console.log(params);
-
     const url = `${this.baseUrl}/products/${productId}`;
     return this.http.put(url, params);
+  }
+
+  uploadImageProduct(form: FormData, params: { [key: string]: string }) {
+    const url = `${this.baseUrl}/upload`;
+
+    return this.http.post(url, form, {
+      params: params
+    })
   }
 
   // add to cart by getting the product id

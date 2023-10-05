@@ -14,7 +14,7 @@ import { ProductCategoryService } from '../services/product-category.service';
 export class ProductComponent implements OnInit {
   products: Product[] = [];
   categories: ProductCategory[] = [];
-  selectedCategory: string | null = null;
+  selectedCategory: ProductCategory | null = null;
 
   quantity: number = 1;
   faShoppingCart = faShoppingCart;
@@ -27,6 +27,10 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProducts();
+
+    this.productCategoryService.getCategories().subscribe((data: ProductCategory[]) => {
+      this.categories  = data;
+    });
   }
 
   getProducts(): void {
@@ -35,18 +39,26 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  filterProductsByCategory(categoryName: string) {
-    this.selectedCategory = categoryName;
-    // console.log(this.selectedCategory = category)
+  // filterProductsByCategory(categoryName: string) {
+  //   this.selectedCategory = categoryName;
+  //   // console.log(this.selectedCategory = category)
+  // }
+
+  getProductsByCategory(category: ProductCategory) {
+    this.selectedCategory = category;
+    this.productService.getProductsByCategory(category.id).subscribe((data: any) => {
+      this.products = data;
+      const firstProduct = data[0];
+    });
   }
 
-  get filteredProducts(): Product[] {
-    if (!this.selectedCategory) {
-      return this.products;
-    }
+  // get filteredProducts(): Product[] {
+  //   if (!this.selectedCategory) {
+  //     return this.products;
+  //   }
 
-    return this.products.filter(product => product.category && product.category.categoryName === this.selectedCategory);
-  }
+  //   return this.products.filter(product => product.category && product.category.categoryName === this.selectedCategory);
+  // }
 
   addToCart(productId: number) {
     const cartItem = {
@@ -57,5 +69,9 @@ export class ProductComponent implements OnInit {
     this.productService.addToCart(cartItem).subscribe((data: any) => {
       console.log(productId);
     });
+  }
+
+  public handleMissingImage(event: Event) {
+    (event.target as HTMLImageElement).style.display = 'none';
   }
 }

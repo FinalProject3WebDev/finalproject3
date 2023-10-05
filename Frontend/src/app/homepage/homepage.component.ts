@@ -13,7 +13,7 @@ export class HomepageComponent {
   products: Product[] = [];
   quantity: number = 1;
   faShoppingCart = faShoppingCart;
-  
+
   constructor(private http: HttpClient, private productService: ProductService) { }
 
   ngOnInit(): void {
@@ -32,5 +32,9 @@ export class HomepageComponent {
     this.productService.addToCart(cartItem).subscribe((data: any) => {
       console.log(productId);
     });
+  }
+
+  public handleMissingImage(event: Event) {
+    (event.target as HTMLImageElement).style.display = 'none';
   }
 }

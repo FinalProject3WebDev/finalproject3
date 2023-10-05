@@ -5,7 +5,7 @@
         <li (click)="selectedCategory = null; getProducts()">
           <a>All</a>
         </li>
-        <li *ngFor="let category of categories" (click)="filterProductsByCategory(category.categoryName)">
+        <li *ngFor="let category of categories" (click)="getProductsByCategory(category)">
           <a>{{ category.categoryName }}</a>
         </li>
       </ul>
@@ -14,11 +14,11 @@
 </section>
 
 <section class="products section" id="products">
-  <!-- <h2 class="selected-category__name" >{{ selectedCategory?.categoryName || "All" }} Products</h2> -->
+  <h2 class="selected-category__name" >{{ selectedCategory?.categoryName || "All" }} Products</h2>
   <div class="products__container container grid">
-    <article class="products__card" *ngFor="let product of filteredProducts.slice(0, 6)">
+    <article class="products__card" *ngFor="let product of products.slice(0, 6)">
       <div class="products__content">
-        <img [src]="product.productImage" class="products__img" alt="Product Image">
+        <img [src]="product.productImage" class="products__img" alt="Product Image" (error)="handleMissingImage($event)" >
 
         <h3 class="products__title">{{ product.productName }}</h3>
         <span class="products__price">Rp. {{ product.price }}</span>

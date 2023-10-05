@@ -12,11 +12,11 @@ import { CartItem } from '../interfaces/cart';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  cartItems: any[] = []; 
+  cartItems: any[] = [];
   user!: User;
 
   totalPrice = 0;
-  shippingCost = 10; 
+  shippingCost = 10;
   shippingAddress = '';
   name = '';
 
@@ -36,7 +36,7 @@ export class CartComponent implements OnInit {
           this.cartItems = response.cartItems;
           this.totalPrice = response.totalPrice;
         } else {
-          this.cartItems = []; 
+          this.cartItems = [];
         }
       },
       (error) => {
@@ -86,5 +86,9 @@ export class CartComponent implements OnInit {
 
   editProfile(): void {
     window.location.href = '/profile/edit';
+  }
+
+  public handleMissingImage(event: Event) {
+    (event.target as HTMLImageElement).style.display = 'none';
   }
 }

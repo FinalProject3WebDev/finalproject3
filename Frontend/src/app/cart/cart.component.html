@@ -20,12 +20,12 @@
             <div class="cart-items">
                 <h2>Cart Items</h2>
                 <!-- BOX FOR EACH ITEM -->
-            
+
                 <div *ngFor="let item of cartItems" class="card mb-4">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-2">
-                                <img [src]="item.Product.productImage" alt="Product Image" class="img-thumbnail">
+                                <img [src]="item.Product.productImage" alt="Product Image" class="img-thumbnail" (error)="handleMissingImage($event)">
                             </div>
                             <div class="col-md-10">
                                 <h3 class="mb-2">{{ item.Product.productName }}</h3>
@@ -43,8 +43,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>  
-                </div> 
+                    </div>
+                </div>
 
 
             </div>
@@ -54,7 +54,7 @@
             <div class="order-detail card">
                 <div class="card-body">
                     <h2>Order Summary</h2>
-                    
+
                     <hr>
                     <p class="mb-4">Total: {{'Rp. ' + totalPrice}}</p>
                     <button type="button" class="button btn-primary btn-lg btn-block" (click)="checkout()">Checkout</button>
