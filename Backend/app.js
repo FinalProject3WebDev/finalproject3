@@ -1,15 +1,15 @@
 // import dari node_module
 const express = require('express')
-const cors = require('cors')
 const bodyParser = require('body-parser')
 const app = express()
 const PORT = 3000
 const router = require('./routers')
 
+app.use('/images', express.static('images'));
+
 app
    .use(express.json())
    .use(express.urlencoded({ extended: false }))
-   .use(cors())
    // .use(bodyParser.json())
 
 app.use(router);

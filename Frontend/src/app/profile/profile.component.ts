@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from '../interfaces/user';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -9,13 +10,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
-  user!: User;
+  user: User | null = null;
 
-  constructor(private userService: UserService, private router: Router) { }
-  
+  constructor(private userService: UserService, private router: Router) {
+    // disini ngambil langsung dari user subject yang ada di userservice
+    this.userService.user$.subscribe((data) => {
+      this.user = data
+    })
+  }
+
   ngOnInit(): void {
     this.userService.getUserProfile().subscribe((data: any) => {
-      this.user = data.user;
+      // this.user = data.user;
+
     });
   }
 

@@ -43,6 +43,8 @@ export class ProductService {
     price: any,
     stock: any,
   }) {
+    console.log(params);
+
     const url = `${this.baseUrl}/products/${productId}`;
     return this.http.put(url, params);
   }

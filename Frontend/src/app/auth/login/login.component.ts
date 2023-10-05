@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ export class LoginComponent {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private userService: UserService,
     private router: Router
   ) {
     this.form = this.formBuilder.group({
@@ -31,8 +33,10 @@ export class LoginComponent {
           const accessToken = response.accessToken;
           localStorage.setItem('accessToken', accessToken); // Store the token in localStorage
 
-          const user = response;
-          localStorage.setItem('user', JSON.stringify(user)); // Store the user role in localStorage
+          this.userService.getUserProfile().subscribe((data: any) => {
+            // this.user = data.user;
+            console.log(data.user);
+          });
 
           // Log the token to the console
           console.log('Access Token:', accessToken);

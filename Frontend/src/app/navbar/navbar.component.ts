@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
-import { UserCredential } from '../interfaces/user';
+import { User, UserCredential } from '../interfaces/user';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,19 +12,27 @@ import { UserCredential } from '../interfaces/user';
 export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false;
   isNotLoggedIn: boolean = false;
-  user: UserCredential = {};
+  user: User | null = null;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private userService: UserService, private authService: AuthService, private router: Router) {
+    this.userService.user$.subscribe((data) => {
+      this.user = data
+      this.isLoggedIn = this.authService.isLoggedIn();
+      this.isNotLoggedIn = !this.authService.isLoggedIn();
+    })
+  }
 
   ngOnInit(): void {
-    this.isLoggedIn = this.authService.isLoggedIn();
-    this.isNotLoggedIn = !this.authService.isLoggedIn();
-    this.user = JSON.parse(this.authService.getUser() as string);
+    this.userService.getUserProfile().subscribe((data: any) => {
+    });
   }
 
   onLogout(): void {
     this.authService.removeToken();
     this.authService.removeUser();
+
+    // mengembalikan user subject ke null
+    this.userService.user.next(null)
     this.router.navigate(['/login']);
   }
 }

@@ -141,7 +141,7 @@
     <div class="products__container container grid">
       <article class="products__card" *ngFor="let product of products.slice(0, 6)">
         <div class="products__content">
-          <!-- <img [src]="product.productImage" class="products__img" alt="Product Image"> -->
+          <img [src]="product.productImage" class="products__img" alt="Product Image">
 
           <h3 class="products__title">{{ product.productName }}</h3>
           <span class="products__price">Rp. {{ product.price }}</span>

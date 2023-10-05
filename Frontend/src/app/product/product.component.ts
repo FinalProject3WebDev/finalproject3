@@ -26,19 +26,23 @@ export class ProductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.productService.getAllProducts().subscribe((data: Product[]) => {
-      this.products = data;
-      console.log(this.products)
-    });
+    this.getProduct()
 
     this.productCategoryService.getCategories().subscribe((data: ProductCategory[]) => {
       this.categories  = data;
     });
   }
 
+  getProduct() {
+    this.productService.getAllProducts().subscribe((data: Product[]) => {
+      this.products = data;
+      console.log(this.products)
+    });
+  }
   getProductsByCategory(category: ProductCategory) {
     this.selectedCategory = category;
     this.productService.getProductsByCategory(category.id.toString()).subscribe((data: any) => {
+      this.products = data;
       const firstProduct = data[0];
     });
   }
