@@ -222,6 +222,10 @@ a, a:hover {
   align-self: flex-end;
 }
 
+.products__content img {
+  width: 200px;
+}
+
 .products__title, .products__price {
   font-size: .813rem;
   width: 100px;
