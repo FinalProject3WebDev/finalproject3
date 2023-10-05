@@ -23,6 +23,8 @@ export class MasterProductComponent implements OnInit {
   @ViewChild(DataTableDirective, { static: false })
   dtElement?: DataTableDirective;
 
+  uploadedFiles: any = null;
+
   productsApi: Product[] = [];
   products: Product[] = [];
   categories: ProductCategory[] = [];
@@ -118,98 +120,111 @@ export class MasterProductComponent implements OnInit {
   editProduct(product: Product) {
     this.is['edit'] = true;
     this.is['create'] = false;
+    this.uploadedFiles = null;
     this.formProduct = product;
   }
 
   createProduct() {
     this.is['edit'] = false;
     this.is['create'] = true;
+    this.uploadedFiles = null;
     this.formProduct = {};
   }
 
   cancelForm() {
     this.is['edit'] = false;
     this.is['create'] = false;
+    this.uploadedFiles = null;
     this.formProduct = {};
   }
 
   onSubmit() {
     switch (true) {
       case this.is['edit']:
-        // const {
-        //   editProductName,
-        //   editProductDescription,
-        //   editPrice,
-        //   editStock,
-        // } = this.formProduct;
-        
         this.productService
           .editProduct(this.formProduct.id, {
             productName: this.formProduct.productName,
             productDescription: this.formProduct.productDescription,
             price: this.formProduct.price,
             stock: this.formProduct.stock,
+            categoryId: this.formProduct.categoryId,
           })
           .subscribe((data: any) => {
-            alert(data.message);
-            setTimeout(() => {
-              this.getProduct(true);
-            }, 1000);
+            if (!!this.uploadedFiles) {
+              this.upload(this.formProduct.id).subscribe(
+                (res) => {
+                  alert(data.message);
+                  setTimeout(() => {
+                    this.getProduct(true);
+                  }, 1000);
+                  this.cancelForm();
+                },
+                (error) => {
+                  alert(error);
+                }
+              )
+            } else {
+              alert(data.message);
+              setTimeout(() => {
+                this.getProduct(true);
+              }, 1000);
+              this.cancelForm();
+            }
           });
         break;
 
       case this.is['create']:
-        // const {
-        //   category,
-        //   productName,
-        //   productDescription,
-        //   price,
-        //   stock,
-        //   productImage,
-        // } = this.formProduct;
-
-        // if (!productName) {
         if (!this.formProduct.productName) {
-          alert("name field required!")
-          return
+          alert('name field required!');
+          return;
         }
 
         if (!this.formProduct.category) {
-          alert("category field required!")
-          return
+          alert('category field required!');
+          return;
         }
 
         if (!this.formProduct.productDescription) {
-          alert("description field required!")
-          return
+          alert('description field required!');
+          return;
         }
 
         if (!this.formProduct.price) {
-          alert("price field required!")
-          return
+          alert('price field required!');
+          return;
         }
 
         if (!this.formProduct.stock) {
-          alert("stock field required!")
-          return
+          alert('stock field required!');
+          return;
         }
 
-        if (!this.formProduct.productImage) {
-          alert("image field required!")
-          return
+        if (!this.uploadedFiles) {
+          alert('image field required!');
+          return;
         }
 
         this.productService
           .createProduct({
-            categoryId: this.formProduct.category.id,
+            categoryId: this.formProduct.category,
             productName: this.formProduct.productName,
             productDescription: this.formProduct.productDescription,
             price: this.formProduct.price,
             stock: this.formProduct.stock,
-            productImage: this.formProduct.productImage
           })
           .subscribe((data: any) => {
-            alert("Product has been created successfully");
+            this.upload(data.id).subscribe(
+              (res) => {
+                alert('Product has been created successfully');
+                setTimeout(() => {
+                  this.getProduct(true);
+                }, 1000);
+                this.cancelForm();
+              },
+              (error) => {
+                alert(error);
+              }
+            )
             setTimeout(() => {
               this.getProduct(true);
             }, 1000);
@@ -217,9 +232,9 @@ export class MasterProductComponent implements OnInit {
         break;
 
       default:
+        this.cancelForm();
         break;
     }
-    this.cancelForm();
   }
   rerender(): void {
     this.products = this.productsApi.slice();
@@ -230,5 +245,20 @@ export class MasterProductComponent implements OnInit {
       // Call the dtTrigger to rerender again
       this.dtTrigger.next(true);
     });
+  }
+
+  fileChange(element: any) {
+    this.uploadedFiles = element.target.files;
+  }
+
+  upload(productId: number) {
+    let formData = new FormData();
+      formData.append(
+        'uploads',
+        this.uploadedFiles[0],
+        this.uploadedFiles[0].name
+      );
+
+     return this.productService.uploadImageProduct(formData, {productId: productId.toString()})
   }
 }

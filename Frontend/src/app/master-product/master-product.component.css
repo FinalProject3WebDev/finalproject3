@@ -194,3 +194,15 @@ a, a:hover {
   padding: .5rem;
   border-radius: .35rem;
 }
+
+.content {
+  margin: 100px;
+}
+
+.margin25 {
+  margin: 25px;
+}
+
+.upload {
+  cursor: pointer;
+}

@@ -13,7 +13,6 @@ import { MasterProductComponent } from './master-product/master-product.componen
 import { AdminGuard } from './admin.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/homepage', pathMatch: 'full' },
   { path: 'homepage', component: HomepageComponent },
   { path: 'products', component: ProductComponent},
   { path: 'master-products', component: MasterProductComponent, canActivate: [AdminGuard]},
@@ -22,7 +21,8 @@ const routes: Routes = [
   { path: 'register', component:RegisterComponent},
   { path: 'orders', component: OrderComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'profile/edit', component: EditProfileComponent, canActivate: [AuthGuard] }
+  { path: 'profile/edit', component: EditProfileComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/homepage', pathMatch: 'full' },
 ];
 
 @NgModule({

@@ -10,6 +10,18 @@ const cors = require('cors')
 const { authentication, sendUserData } = require('../middleware/authentication');
 const adminController = require('../controllers/adminController');
 
+const bodyParser = require("body-parser");
+
+const multipart = require('connect-multiparty');
+const multipartMiddleware = multipart({
+    uploadDir: './images'
+});
+
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({
+    extended: true
+}));
+
 router.use(cors())
 
 // Product
@@ -31,6 +43,7 @@ router.delete('/users/:id', adminController.deleteUser);
 router.post('/products', authentication, isAdmin, ProductController.createProduct); 
 router.delete('/products/:productId', authentication, isAdmin, ProductController.deleteProduct); 
 router.put('/products/:productId', authentication, isAdmin, ProductController.editProduct); 
+router.post('/upload', authentication, isAdmin, multipartMiddleware, ProductController.uploadImage);
 
 // -------------------------- ROUTES YANG PERLU AUTENTIKASI --------------------------
 

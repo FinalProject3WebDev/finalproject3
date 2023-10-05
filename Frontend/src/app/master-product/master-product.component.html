@@ -75,11 +75,11 @@
 
         <div class="mb-3">
           <label for="category" class="form-label">Category</label>
-          <select id="category" name="category" [(ngModel)]="formProduct.category" class="form-select" [disabled]="is['edit']">
+          <select id="category" name="category" [(ngModel)]="formProduct.categoryId" class="form-select">
             <option *ngFor="let category of categories" [value]="category.id">{{ category.categoryName }}</option>
           </select>
-        </div>        
-        
+        </div>
+
         <!-- <div class="mb-3">
           <label for="image" class="form-label">Image</label>
           <input type="text" id="image" name="image" [(ngModel)]="formProduct.productImage" class="form-control" [disabled]="is['edit']">
@@ -87,8 +87,10 @@
         <div class="mb-3">
           <label for="image" class="form-label">Image</label>
           <!-- <input type="file" id="image" name="image" (change)="onImageSelected($event)" class="form-control" [disabled]="is['edit']"> -->
-          <input type="file" id="image" name="image" [(ngModel)]="formProduct.productImage" class="form-control" [disabled]="is['edit']">
-        </div>        
+            <input type="file" (change)="fileChange($event)" class="form-control custom-file-input" id="inputGroupFile01" accept="image/x-png,image/gif,image/jpeg" aria-describedby="inputGroupFileAddon01">
+          <!-- <input type="file" id="image" name="image" [(ngModel)]="formProduct.productImage" class="form-control" [disabled]="is['edit']"> -->
+        </div>
+
 
         <div class="mb-3">
           <label for="address" class="form-label">Description</label>
