@@ -14,7 +14,7 @@ import { ProductCategoryService } from '../services/product-category.service';
 export class ProductComponent implements OnInit {
   products: Product[] = [];
   categories: ProductCategory[] = [];
-  selectedCategory: ProductCategory | null = null;
+  selectedCategory: string | null = null;
 
   quantity: number = 1;
   faShoppingCart = faShoppingCart;
@@ -26,25 +26,26 @@ export class ProductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getProduct()
+    this.getProducts();
+  }
 
-    this.productCategoryService.getCategories().subscribe((data: ProductCategory[]) => {
-      this.categories  = data;
+  getProducts(): void {
+    this.productService.getAllProducts().subscribe((products) => {
+      this.products = products;
     });
   }
 
-  getProduct() {
-    this.productService.getAllProducts().subscribe((data: Product[]) => {
-      this.products = data;
-      console.log(this.products)
-    });
+  filterProductsByCategory(categoryName: string) {
+    this.selectedCategory = categoryName;
+    // console.log(this.selectedCategory = category)
   }
-  getProductsByCategory(category: ProductCategory) {
-    this.selectedCategory = category;
-    this.productService.getProductsByCategory(category.id.toString()).subscribe((data: any) => {
-      this.products = data;
-      const firstProduct = data[0];
-    });
+
+  get filteredProducts(): Product[] {
+    if (!this.selectedCategory) {
+      return this.products;
+    }
+
+    return this.products.filter(product => product.category && product.category.categoryName === this.selectedCategory);
   }
 
   addToCart(productId: number) {
@@ -54,7 +55,7 @@ export class ProductComponent implements OnInit {
     };
 
     this.productService.addToCart(cartItem).subscribe((data: any) => {
-      console.log("product id:", productId);
+      console.log(productId);
     });
   }
 }

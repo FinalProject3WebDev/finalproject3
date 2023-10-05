@@ -1,21 +1,11 @@
-<!-- <div class="card" *ngFor="let product of products">
-    <img [src]="product.productImage" class="card-img-top" alt="Product Image">
-    <div class="card-body">
-      <h5 class="card-title">{{ product.productName }}</h5>
-      <p class="card-text">{{ product.productDescription }}</p>
-      <p class="card-text">Price: ${{ product.price }}</p>
-      <p></p>
-      <button (click)="addToCart(product.id)" class="btn btn-primary">Add to Cart</button>
-    </div>
-</div> -->
 <section class="sectionJumper section">
   <div class="section-jumper section-jumper- section-jumper--light section-jumper--sticky section-jumper--initialized">
     <div class="section-jumper__main">
       <ul>
-        <li (click)="selectedCategory = null; getProduct()">
+        <li (click)="selectedCategory = null; getProducts()">
           <a>All</a>
         </li>
-        <li *ngFor="let category of categories" (click)="getProductsByCategory(category)">
+        <li *ngFor="let category of categories" (click)="filterProductsByCategory(category.categoryName)">
           <a>{{ category.categoryName }}</a>
         </li>
       </ul>
@@ -24,9 +14,9 @@
 </section>
 
 <section class="products section" id="products">
-  <h2 class="selected-category__name" >{{ selectedCategory?.categoryName || "All" }} Products</h2>
+  <!-- <h2 class="selected-category__name" >{{ selectedCategory?.categoryName || "All" }} Products</h2> -->
   <div class="products__container container grid">
-    <article class="products__card" *ngFor="let product of products.slice(0, 6)">
+    <article class="products__card" *ngFor="let product of filteredProducts.slice(0, 6)">
       <div class="products__content">
         <img [src]="product.productImage" class="products__img" alt="Product Image">
 

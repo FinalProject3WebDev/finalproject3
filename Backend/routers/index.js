@@ -8,6 +8,7 @@ const { isAdmin } = require('../middleware/authorization');
 const cors = require('cors')
 
 const { authentication, sendUserData } = require('../middleware/authentication');
+const adminController = require('../controllers/adminController');
 
 router.use(cors())
 
@@ -18,6 +19,13 @@ router.get('/categories', ProductCategoryController.getAllCategories);
 // Users 
 router.post('/register', UserController.register);
 router.post('/login', UserController.login);
+// Users -- Admin view
+// router.get('/user-list', UserController.getAllUser);
+router.get('/users', isAdmin, adminController.getAllUsers);
+router.post('/users', adminController.createUser);
+router.get('/users/:id', adminController.getUserById);
+router.put('/users/:id', adminController.updateUser);
+router.delete('/users/:id', adminController.deleteUser);
 
 // -------------------------- ROUTES YANG PERLU AUTORISASI --------------------------
 router.post('/products', authentication, isAdmin, ProductController.createProduct); 

@@ -15,9 +15,8 @@ export class ProductService {
     return this.http.get<Product[]>(`${this.baseUrl}/products`)
   }
 
-  getProductsByCategory(categoryId: string) {
-    const url = `${this.baseUrl}/products?categoryId=${categoryId}`;
-    return this.http.get(url);
+  getProductsByCategory(categoryId: number) {
+    return this.http.get<Product[]>(`${this.baseUrl}/products?categoryId=${categoryId}`);
   }
 
   createProduct(params: {

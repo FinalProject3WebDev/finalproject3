@@ -100,7 +100,7 @@ export class MasterProductComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    // Do not forget to unsubscribe the event
+    // do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
   }
 
@@ -136,7 +136,13 @@ export class MasterProductComponent implements OnInit {
   onSubmit() {
     switch (true) {
       case this.is['edit']:
-
+        // const {
+        //   editProductName,
+        //   editProductDescription,
+        //   editPrice,
+        //   editStock,
+        // } = this.formProduct;
+        
         this.productService
           .editProduct(this.formProduct.id, {
             productName: this.formProduct.productName,
@@ -153,6 +159,16 @@ export class MasterProductComponent implements OnInit {
         break;
 
       case this.is['create']:
+        // const {
+        //   category,
+        //   productName,
+        //   productDescription,
+        //   price,
+        //   stock,
+        //   productImage,
+        // } = this.formProduct;
+
+        // if (!productName) {
         if (!this.formProduct.productName) {
           alert("name field required!")
           return
@@ -190,7 +206,7 @@ export class MasterProductComponent implements OnInit {
             productDescription: this.formProduct.productDescription,
             price: this.formProduct.price,
             stock: this.formProduct.stock,
-            productImage: this.formProduct.productImage,
+            productImage: this.formProduct.productImage
           })
           .subscribe((data: any) => {
             alert("Product has been created successfully");
