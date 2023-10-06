@@ -179,10 +179,10 @@ export class MasterProductComponent implements OnInit {
           return;
         }
 
-        if (!this.formProduct.category) {
-          alert('category field required!');
-          return;
-        }
+        // if (!this.formProduct.category) {
+        //   alert('category field required!');
+        //   return;
+        // }
 
         if (!this.formProduct.productDescription) {
           alert('description field required!');
@@ -204,9 +204,11 @@ export class MasterProductComponent implements OnInit {
           return;
         }
 
+        console.log("this.formProduct.category")
+
         this.productService
           .createProduct({
-            categoryId: this.formProduct.category,
+            categoryId: this.formProduct.categoryId,
             productName: this.formProduct.productName,
             productDescription: this.formProduct.productDescription,
             price: this.formProduct.price,

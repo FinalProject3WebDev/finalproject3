@@ -14,9 +14,9 @@
         <li class="nav__item" *ngIf="user?.role === 'admin'">
           <a class="nav__link" routerLink="/master-products" >Master Products</a>
         </li>
-        <li class="nav__item">
+        <!-- <li class="nav__item">
           <a class="nav__link" routerLink="/about">About</a>
-        </li>
+        </li> -->
         <li class="nav__item" *ngIf="isNotLoggedIn">
           <a class="nav__link" routerLink="/register">Register</a>
         </li>
@@ -24,11 +24,11 @@
           <a class="nav__link" routerLink="/login">Login</a>
         </li>
         <li class="nav__item" *ngIf="isLoggedIn" class="dropdown">
-          <a class="nav__link dropdown-toggle">Menu</a>
+          <a class="nav__link dropdown-toggle">Profile</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
+            <li><a class="dropdown-item" routerLink="/profile">My profile</a></li>
             <li><a class="dropdown-item" routerLink="/cart">Cart</a></li>
-            <li><a class="dropdown-item" routerLink="/orders">My Order</a></li>
+            <li><a class="dropdown-item" routerLink="/orders">My order</a></li>
             <li><a class="dropdown-item" (click)="onLogout()">Logout</a></li>
           </ul>
         </li>

@@ -9,7 +9,6 @@ app.use('/images', express.static('images'));
 app
    .use(express.json())
    .use(express.urlencoded({ extended: false }))
-   // .use(bodyParser.json())
 
 app.use(router);
 
