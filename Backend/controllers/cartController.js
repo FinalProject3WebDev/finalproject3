@@ -1,4 +1,5 @@
 const { Product, Cart, CartItem } = require('../models');
+const { urlPath } = require('../helpers/urlPath');
 
 class CartController {
     // add item to cart
@@ -101,6 +102,12 @@ class CartController {
                 if (!cart) {
                     return res.status(404).json({ message: 'Cart not found' });
                 }
+
+                cart.CartItems = cart.CartItems.map((value) => {
+                    value.Product.productImage = urlPath(value.Product.productImage, req)
+            
+                    return value
+                  })
 
                 const totalPrice = cart.CartItems.reduce((sum, cartItem) => {
                     return sum + cartItem.price; 
